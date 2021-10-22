@@ -13,6 +13,7 @@ import com.nth.validator.WebAppValidator;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,8 +44,11 @@ public class JobController {
     
     @Autowired
     private CommentService commentService;
+    
+    @Value("${page.max.comment}")
+    private int maxPageComment;
 
-    @InitBinder
+    @InitBinder("job")
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(jobValidator);
     }
@@ -52,6 +56,7 @@ public class JobController {
     @GetMapping("/td/jobs")
     public String list(Model model) {
         model.addAttribute("job", new Job());
+        model.addAttribute("joblocas", this.locationService.getJobLoca());
         return "job";
     }
 
@@ -60,6 +65,7 @@ public class JobController {
             BindingResult result) {
         if (!result.hasErrors()) {
             if (this.jobService.addOrUpdate(job) == true) {
+                
                 model.addAttribute("success", "Đăng bài thành công");
                 return "forward:/";
             } else {
@@ -74,10 +80,10 @@ public class JobController {
             @PathVariable(value = "jobId") int jobId,
             @RequestParam(required = false) Map<String, String> params) {
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        model.addAttribute("jobs", this.jobService.getJobById(jobId));
+        model.addAttribute("job", this.jobService.getJobById(jobId));
         model.addAttribute("comments", this.commentService.getComment(jobId,page));
         model.addAttribute("count", this.commentService.coutCommentById(jobId));
+        model.addAttribute("maxComm", maxPageComment);
         return "jobdetail";
     }
-
 }

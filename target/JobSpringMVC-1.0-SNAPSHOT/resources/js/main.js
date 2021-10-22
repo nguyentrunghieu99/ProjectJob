@@ -39,4 +39,6 @@ function addComment(jobId, userId) {
     })
 
 }
-
+function abc(){
+            alert("Nộp đơn ứng tuyển thành công!!");
+        }

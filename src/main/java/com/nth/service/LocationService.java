@@ -6,6 +6,7 @@
 package com.nth.service;
 
 import com.nth.pojos.Job;
+import com.nth.pojos.JobLoca;
 import com.nth.pojos.Location;
 import java.util.List;
 
@@ -14,6 +15,9 @@ import java.util.List;
  * @author Hieu
  */
 public interface LocationService {
-    List<Location> getLocationsById(int Id);
+    Location getLocationById(int locaId);
+    List<Location> getLocation();
+    List<JobLoca> getJobLoca();
+    boolean addJobLoca(JobLoca jobloca);
     
 }

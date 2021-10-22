@@ -5,9 +5,8 @@
  */
 package com.nth.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.nth.formatter.CategoryFormatter;
+import com.nth.formatter.JobLocaFormatter;
 import com.nth.formatter.LocationFormatter;
 import com.nth.validator.JobNameValidator;
 import com.nth.validator.WebAppValidator;
@@ -96,13 +95,13 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CategoryFormatter());
         registry.addFormatter(new LocationFormatter());
+        registry.addFormatter(new JobLocaFormatter());
     }
 
     @Bean
     public WebAppValidator jobValidator() {
         Set<Validator> springValidators = new HashSet<>();
         springValidators.add(new JobNameValidator());
-
         WebAppValidator v = new WebAppValidator();
         v.setSpringValidators(springValidators);
 

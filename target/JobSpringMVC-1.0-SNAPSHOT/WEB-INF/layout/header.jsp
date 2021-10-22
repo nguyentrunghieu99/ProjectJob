@@ -12,12 +12,6 @@
             <a class="nav-link" href="<c:url value="/"/>">Trang chủ</a>
         </li>
 
-        <c:forEach var="cat" items="${categories}" >
-            <li class="nav-item">
-                <a class="nav-link" href="#">${cat.name}</a>
-            </li>
-        </c:forEach>
-
         <c:if test="${pageContext.request.userPrincipal.name == null}">
             <li class="nav-item active">
                 <a class="nav-link text-danger" href="<c:url value="/login"/>">Đăng Nhập</a>
@@ -30,11 +24,14 @@
 
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <li class="nav-item active">
-                <a class="nav-link text-danger" href="<c:url value="/"/>">Xin Chào:${pageContext.request.userPrincipal.name}</a>
+                <a class="nav-link text-danger" href="<c:url value="/userdetail"/>">
+                    Xin Chào: ${currentUser.firstName} ${currentUser.lastName}
+                </a>
+                    <a class="nav-link" href="<c:url value="/"/>"><p>${currentUser.userRole}</p></a>
             </li>
 
             <li class="nav-item active">
-                <a class="nav-link text-danger" href="<c:url value="logout"/>">Đăng Xuất</a>
+                <a class="nav-link text-danger" href="/JobSpringMVC/logout">Đăng Xuất</a>
             </li>
         </c:if>
 

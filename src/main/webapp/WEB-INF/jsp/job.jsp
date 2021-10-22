@@ -9,6 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <c:url value="/td/jobs" var="action"/>
 
 <c:if test="${errMsg != null}">
@@ -58,14 +59,17 @@
     </div>
 
     <div class="form-group">
-        <label for="loca">Địa Điểm</label>
-        <form:select id="loca" path="locations"  cssClass="form-control">
+        <label for="jobloca">Địa điểm</label>
+        <form:select id="jobloca" path="jobloca" cssClass="form-control">
             <c:forEach var="loca" items="${locations}">
                 <option value="${loca.id}">${loca.name}</option>
             </c:forEach>
         </form:select>
-        <form:errors path="locations" cssClass="alert alert-danger" element="div"/>
+        <form:errors path="jobloca" cssClass="alert alert-danger" element="div"/>
     </div>
+
+
+
 
     <div class="form-group">
         <label for="address">Địa chỉ</label>

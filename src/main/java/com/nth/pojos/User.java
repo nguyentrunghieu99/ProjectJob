@@ -18,7 +18,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -39,7 +42,7 @@ public class User implements Serializable {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    private int age;
+    private int age;    
     private String email;
     private String phone;
     private String avatar;
@@ -52,6 +55,14 @@ public class User implements Serializable {
 
     @Transient
     private String confirmPassword;
+    
+    @Transient
+    private MultipartFile file;
+    
+    @Transient
+    private MultipartFile filecv;
+    
+    
 
     /**
      * @return the id
@@ -233,6 +244,34 @@ public class User implements Serializable {
      */
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    /**
+     * @return the filecv
+     */
+    public MultipartFile getFilecv() {
+        return filecv;
+    }
+
+    /**
+     * @param filecv the filecv to set
+     */
+    public void setFilecv(MultipartFile filecv) {
+        this.filecv = filecv;
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface JobRepository {
     Job getJobById(int Id);
-    List<Job> getJobs(String kw,int page);
-    long countJob();
+    List<Job> getJobs(String kw,int page, int cat, int loca);
+    long countJob(String kw,int cat,int loca);
     boolean addOrUpdate(Job job);
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +18,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -55,7 +52,6 @@ public class Job implements Serializable {
     private BigDecimal pay;
     private String image;
     @Column(name = "created_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
     private Date createDate;
     private Boolean active;
 
@@ -68,19 +64,12 @@ public class Job implements Serializable {
     @NotNull(message = "{job.category.nullErr}")
     private Category category;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "job_loca",
-            joinColumns = {
-                @JoinColumn(name = "job_id")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "loca_id")}
-    )
-    @Column(name = "location")
-    private Set<Location> locations;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private Collection<Comment> commentCollection;
+    
+    @OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
+    private List<JobLoca> jobloca;
 
     /**
      * @return the id
@@ -183,19 +172,6 @@ public class Job implements Serializable {
         this.file = file;
     }
 
-    /**
-     * @return the locations
-     */
-    public Set<Location> getLocations() {
-        return locations;
-    }
-
-    /**
-     * @param locations the locations to set
-     */
-    public void setLocations(Set<Location> locations) {
-        this.locations = locations;
-    }
 
     /**
      * @return the pay
@@ -278,7 +254,23 @@ public class Job implements Serializable {
      * @param commentCollection the commentCollection to set
      */
     public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
+        this.commentCollection = commentCollection;}
+
+    /**
+     * @return the jobloca
+     */
+    public List<JobLoca> getJobloca() {
+        return jobloca;
     }
+
+    /**
+     * @param jobloca the jobloca to set
+     */
+    public void setJobloca(List<JobLoca> jobloca) {
+        this.jobloca = jobloca;
+    }
+
+
+    
 
 }

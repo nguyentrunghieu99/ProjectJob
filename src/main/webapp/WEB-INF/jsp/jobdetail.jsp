@@ -9,52 +9,66 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1 class="text-center text-danger">Chi Tiết Công Việc</h1>
+
+
+
+
 <div class="text-center">
     <form class="form-group">
         <div class="box-image">
-            <img class="img-fluid" src="${jobs.image}"   alt="${jobs.name}"/>
+            <img class="img-fluid" src="${job.image}"   alt="${job.name}"/>
         </div>
 
         <div>
-            <h2>${jobs.name}</h2>
+            <h2>${job.name}</h2>
         </div>
+        
+           
+        
+        
         <div>
-            <c:if test="${jobs.pay == null}">
+            <c:if test="${job.pay == null}">
                 <h4>Lương: Thỏa Thuận</h4>
             </c:if>
-            <c:if test="${jobs.pay != null}">
-                <h4>Lương: ${jobs.pay}</h4>
+            <c:if test="${job.pay != null}">
+                <h4>Lương: ${job.pay}</h4>
             </c:if>
         </div>
+        
+            
+        
+        
+        
+        
         <div>
-            <input type="submit" value="Ứng Tuyển" onclick="addComment(${jobs.id}, 8)" class="btn btn-danger"/>
+            <input type="submit" value="Ứng Tuyển" class="btn btn-danger"/>
         </div>
 
     </form>
 
     <form>
         <div class="my-date">
-            <p>Địa chỉ:  ${jobs.address}</p>
+            <p>Địa chỉ:  ${job.address}</p>
             <span>Đăng vào: </span>
 
-        </span><span>${jobs.createDate} </span>
+        <span>${job.createDate} </span>
 </div>
 </form>
 
 <form>
     <div>
         <h3>Mô tả công việc</h3>
-        <p>${jobs.description}</p>
+        <p>${job.description}</p>
     </div>
 
     <div>
         <h3>Yêu cầu công việc</h3>
-        <p>${jobs.requirement}</p>
+        <p>${job.requirement}</p>
     </div>
 
     <div>
         <h3>Lý do bạn sẽ yêu thích khi làm việc tại đây</h3>
-        <p>${jobs.reason}</p>
+        <p>${job.reason}</p>
     </div>
 </form>
 </div>
@@ -63,7 +77,7 @@
     <textarea class="form-control" id="commentId" placeholder="Nhap danh gia cua ban"></textarea>
     <form:errors path="content" cssClass="alert alert-danger" element="div"/>
     <br>
-    <input type="submit" value="Gui danh gia" onclick="addComment(${jobs.id}, 7)" class="btn btn-danger"/>
+    <input type="submit" value="Gui danh gia" onclick="addComment(${job.id},${currentUser.id})" class="btn btn-danger"/>
 </div>
 
 

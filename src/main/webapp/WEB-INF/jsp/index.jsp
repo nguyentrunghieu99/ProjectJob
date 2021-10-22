@@ -9,11 +9,65 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+
+<c:forEach items="${jobloca}" var="u">
+    <p>${id}</p>
+</c:forEach>
+
+
+<c:url value="/" var="action"/>
+<sec:authorize access="hasAnyRole('ROLE_USER')">
+    <c:if test="${currentUser.active == null}">
+        <form:form method="post" action="${action}" modelAttribute="currentUser" enctype="multipart/form-data">
+            <table border="0" cellpadding="5">
+                <tr>
+                    <td colspan="2"><input type="submit" class="btn btn-danger" value="ĐĂNG KÝ LÀM NHÀ TUYỂN DỤNG" onclick="abc()"/></td>
+                </tr>
+            </table>
+        </form:form>
+    </c:if>
+    <c:if test="${currentUser.active == Boolean.FALSE}">
+        <h2 class="alert-success">Bạn đã nộp đơn ứng tuyển NTD</h2>
+    </c:if>
+</sec:authorize>
+
+<form>
+    <a class="btn btn-danger">Apply</a>
+    <h1>${userId}</h1>
+</form>
+
+<c:if test="${currentUser != null}">
+    ${currentUser.active}
+</c:if>
+
+<c:if test="${currentUser == null}">
+    <h1>null</h1>
+</c:if>
+
 <c:if test="${success != null}">
     <div  class="alert alert-success alert-dismissible " style="text-align: center">
         <h1>${success}</h1>
     </div>
 </c:if>
+
+<form action="">
+    <select name="cat">
+        <c:forEach items="${categories}" var="c">
+            <option value="${c.id}">${c.name}</option>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Xác nhận" class="btn btn-danger"/>
+</form>
+
+<form action="">
+    <select name="loca">
+        <c:forEach items="${locations}" var="l">
+            <option value="${l.id}">${l.name}</option>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Xác nhận" class="btn btn-danger"/>
+</form>
 
 <h1 class="text-center text-danger">Danh Muc Job</h1>
 <form action="">
@@ -28,9 +82,16 @@
 </form>
 <br>
 
+
 <sec:authorize access="hasAnyRole('ROLE_NTD','ROLE_ADMIN')">
     <div>
         <a href="<c:url value="/td/jobs"/>" class="btn btn-danger">Đăng tin tuyển dụng</a>
+    </div>
+</sec:authorize>
+<br>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <div>
+        <a href="<c:url value="/admin"/>" class="btn btn-danger">Đi đến trang quản trị</a>
     </div>
 </sec:authorize>
 
@@ -40,45 +101,34 @@
     <ul class="pagination">
         <c:forEach begin="1" end="${Math.ceil(counter/maxIn)}" var="i">
 
-            <li class="page-item"><a class="page-link" href="<c:url value="/"/>?page=${i}">${i}</a></li>
+            <li class="page-item"><a class="page-link" href="<c:url value="/"/>?kw=${param.kw}&page=${i}&cat=${param.cat}&loca=${param.loca}">${i}</a></li>
             </c:forEach>
     </ul>
 </div>
 
-<div class="row" >
-    <c:forEach var="j" items="${jobs}">
-        <div class="card col-md-6 bg-dark text-center">
-            <a href="/JobSpringMVC/jobs/${j.id}">
-                <div class="box-image">
-                    <c:if test="${j.image != null && j.image.startsWith('https')== true}">
-                        <div class="card-body ">
-                            <img class="img-fluid" src="<c:url value="${j.image}"/>"    alt="${j.name}" />
-                        </div>
-                    </c:if>
-                    <c:if test="${j.image == null || j.image.startsWith('https')!= true}">
-                        <div class="card-body ">
 
-                            <img class="img-fluid" src="<c:url value="/images/null.jpg"/>"  alt="${j.name}" />
-
-                        </div>
-                    </c:if>
-                </div>
-            </a>
-
-            <div class=" text-center card-footer" style="color: lightpink"  >
-                <h3>${j.name}</h3>
-
-                <c:if test="${j.pay != null}">
+<div class="job-list-wrapper">
+    <c:forEach items="${jobs}" var="j">
+        <div class="job-list-wrapper__item">
+            <img src="${j.image}" alt="null">
+            <div class="job-list-wrapper__item__02">
+                <h2><a href="<c:url value="/jobs/"/>${j.id}">${j.name}</a></h2>
+                    <c:if test="${j.pay != null}">
                     <p>Lương: ${j.pay}</p>
                 </c:if>
 
                 <c:if test="${j.pay == null}">
-                    <p>Lương: Thỏa thuận</p>   
-                </c:if>  
-
-                <a href="<c:url value="jobs"/>/${j.id}" class="btn btn-danger">Xem chi tiết</a>
+                    <p>Lương: Thỏa thuận</p>
+                </c:if>
             </div>
-
+            <div class="job-list-wrapper__item__03">
+                <h2>Hồ Chí Minh</h2>
+                <div class="my-date">
+                    <span>Đăng vào: </span>
+                    <i>${j.createDate}</i>
+                </div>
+                <a href="<c:url value="/jobs/"/>${j.id}" class="btn btn-danger">Xem thông tin</a>
+            </div>
         </div>
     </c:forEach>
 </div>

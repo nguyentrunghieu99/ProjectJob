@@ -6,6 +6,7 @@
 package com.nth.service.impl;
 
 import com.nth.pojos.Job;
+import com.nth.pojos.JobLoca;
 import com.nth.pojos.Location;
 import com.nth.repository.LocationRepository;
 import com.nth.service.LocationService;
@@ -24,8 +25,23 @@ public class LocationServiceImpl implements LocationService {
     private LocationRepository locationRepository;
 
     @Override
-    public List<Location> getLocationsById(int Id) {
-        return this.locationRepository.getLocationsById(Id);
+    public Location getLocationById(int locaId) {
+        return this.locationRepository.getLocationById(locaId);
+    }
+
+    @Override
+    public List<Location> getLocation() {
+        return this.locationRepository.getLocation();
+    }
+
+    @Override
+    public List<JobLoca> getJobLoca() {
+        return this.locationRepository.getJobLoca();
+    }
+
+    @Override
+    public boolean addJobLoca(JobLoca jobloca) {
+        return this.locationRepository.addJobLoca(jobloca);
     }
 
 }

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Hieu
  */
+@Transactional
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
 
@@ -32,6 +33,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         Query q = s.createQuery("From Category");
         return q.getResultList();
 
+    }
+
+    @Override
+    public Category getCategoryById(int id) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        
+        return s.get(Category.class, id);
     }
 
 }

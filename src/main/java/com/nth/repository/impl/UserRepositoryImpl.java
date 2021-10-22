@@ -8,7 +8,6 @@ package com.nth.repository.impl;
 import com.nth.pojos.User;
 import com.nth.repository.UserRepository;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -27,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl implements UserRepository{
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
@@ -37,7 +36,6 @@ public class UserRepositoryImpl implements UserRepository {
         Session s = this.sessionFactory.getObject().getCurrentSession();
         try {
             s.save(user);
-
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
@@ -54,10 +52,10 @@ public class UserRepositoryImpl implements UserRepository {
         query = query.select(root);
 
         if (!username.isEmpty()) {
-            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
-            query = query.where(p);
+            Predicate p1 = builder.like(root.get("username").as(String.class), String.format("%%%s%%", username));
+            Predicate p2 = builder.equal(root.get("userRole").as(String.class), username.trim());
+            query = query.where(builder.or(p1,p2));
         }
-
         Query q = s.createQuery(query);
         return q.getResultList();
     }
@@ -67,5 +65,60 @@ public class UserRepositoryImpl implements UserRepository {
         Session s = this.sessionFactory.getObject().getCurrentSession();
         return s.get(User.class, userId);
     }
+
+    @Override
+    public List<User> getUsers() {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From User");
+
+        return q.getResultList();
+    }
+
+    @Override
+    public void deleteUser(int Id) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        User u = s.byId(User.class).load(Id);
+        s.delete(u);
+
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        s.update(user);
+        return true;
+    }
+
+    @Override
+    public boolean acceptNtd(User user,boolean b) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        if(b==true){
+        user.setActive(true);
+        user.setUserRole("ROLE_NTD");
+        }
+        if(b==false){
+            user.setActive(null);
+            user.setUserRole("ROLE_USER");
+        }
+        
+        s.update(user);
+        return true;
+    }
+
+    @Override
+    public List<User> getUsersByActive() {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+        
+        Predicate p = builder.equal(root.get("active").as(Boolean.class), false);
+        query = query.where(p);
+        Query q = s.createQuery(query);
+        return q.getResultList();
+    }
+
+  
 
 }

@@ -6,16 +6,21 @@
 package com.nth.controllers;
 
 
+import com.nth.pojos.User;
 import com.nth.service.CategoryService;
 import com.nth.service.JobService;
 import com.nth.service.LocationService;
+import com.nth.service.UserService;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,36 +41,38 @@ public class HomeController {
     @Autowired
     private JobService jobService;
     
+    @Autowired
+    private UserService userDetailsService;
+    
     @Value("${page.max.index}")
     private int maxPageIndex;
     
-    @Value("${page.max.comment}")
-    private int maxPageComment;
-    
     
     @ModelAttribute
-    public void commonAttr(Model model){
+    public void commonAttr(Model model,HttpSession session){
          model.addAttribute("categories", this.categoryService.getCategories());
-//         model.addAttribute("locations", this.locationService.getLocationsById(0));
-         model.addAttribute("maxIn", maxPageIndex);
-         model.addAttribute("maxComm", maxPageComment);
-         
-         
-    }
+         model.addAttribute("locations", this.locationService.getLocation());
+         model.addAttribute("currentUser", session.getAttribute("currentUser"));
+         model.addAttribute("jobloca", this.locationService.getJobLoca());
+    }   
     
     @RequestMapping(value = "/")
-    public String index(Model model, 
+    public String index(Model model,
            @RequestParam(value = "kw",required = false, defaultValue = "") String kw,
+           @RequestParam(value = "cat",required = false,defaultValue = "0")Integer cat,
+           @RequestParam(value = "loca",required = false,defaultValue = "0")Integer loca,
            @RequestParam(required = false,defaultValue = "1")Integer page){
-        model.addAttribute("jobs",this.jobService.getJobs(kw,page));
-        model.addAttribute("counter", this.jobService.countJob());
+        model.addAttribute("jobs",this.jobService.getJobs(kw,page,cat,loca));
+        model.addAttribute("counter", this.jobService.countJob(kw,cat,loca));
+        model.addAttribute("maxIn", maxPageIndex);
         return "index";
     }
     
-//    @RequestMapping(path = "/show",method = RequestMethod.POST)
-//    public String show(Model model, @ModelAttribute(value = "user") User user){
-//        model.addAttribute("full", user.getFirstName()+ "" + user.getLastName());
-//        return "index";
-//    }
- 
+    
+    
+    @PostMapping("/")
+    public String test(Model model,@ModelAttribute(value = "currentUser")User user){
+        this.userDetailsService.applyPost(user);
+        return "redirect:/";
+    }
 }

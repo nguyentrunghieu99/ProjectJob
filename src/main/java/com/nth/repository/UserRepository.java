@@ -15,6 +15,12 @@ import java.util.Set;
  */
 public interface UserRepository {
     boolean addUser(User user);
+    boolean updateUser(User user);
+    List<User> getUsers();
     List<User> getUsers(String username);
     User getUserById(int userId);
+    void deleteUser(int Id);
+    boolean acceptNtd(User user,boolean b);
+    List<User> getUsersByActive();
+    
 }

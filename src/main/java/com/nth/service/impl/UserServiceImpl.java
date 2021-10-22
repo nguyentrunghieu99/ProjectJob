@@ -5,11 +5,17 @@
  */
 package com.nth.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import com.google.protobuf.Message;
 import com.nth.pojos.User;
 import com.nth.repository.UserRepository;
 import com.nth.service.UserService;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +33,9 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
+    private Cloudinary cloudinary;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -34,6 +43,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(User user) {
+        if (!user.getFile().isEmpty()) {
+            try {
+                Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                user.setAvatar((String) r.get("secure_url"));;
+            } catch (IOException ex) {
+                System.err.println("==ADD PRODUCT==" + ex.getMessage());
+            }
+        }
+
+        if (!user.getFilecv().isEmpty()) {
+            try {
+                Map cv = this.cloudinary.uploader().upload(user.getFilecv().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                user.setCv((String) cv.get("secure_url"));
+            } catch (IOException ex) {
+                System.err.println("==ADD PRODUCT==" + ex.getMessage());
+            }
+        }
         String pass = user.getPassword();
         user.setPassword(this.passwordEncoder.encode(pass));
         user.setUserRole(User.USER);
@@ -62,6 +90,70 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int userId) {
         return this.userRepository.getUserById(userId);
+    }
+
+    @Override
+    public void uppdateUser(User user) {
+
+        String pass = user.getPassword();
+        if (pass.length() < 50) {
+            user.setPassword(this.passwordEncoder.encode(pass));
+        }
+
+        if (pass.length() > 50) {
+            user.setPassword(pass);
+        }
+
+        if (!user.getFile().isEmpty()) {
+            try {
+                Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                user.setAvatar((String) r.get("secure_url"));;
+            } catch (IOException ex) {
+                System.err.println("==ADD PRODUCT==" + ex.getMessage());
+            }
+        }
+
+        if (!user.getFilecv().isEmpty()) {
+            try {
+                Map cv = this.cloudinary.uploader().upload(user.getFilecv().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                user.setCv((String) cv.get("secure_url"));
+            } catch (IOException ex) {
+                System.err.println("==ADD PRODUCT==" + ex.getMessage());
+            }
+        }
+        this.userRepository.updateUser(user);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return this.userRepository.getUsers();
+    }
+
+    @Override
+    public void deleteUser(int Id) {
+        this.userRepository.deleteUser(Id);
+    }
+
+    @Override
+    public boolean acceptNtd(int userId,boolean b) {
+        User u = this.userRepository.getUserById(userId);
+        this.userRepository.acceptNtd(u,b);
+        return true;
+    }
+
+    @Override
+    public void applyPost(User user) {
+        
+        user.setActive(Boolean.FALSE);
+        
+        this.userRepository.updateUser(user);
+    }
+
+    @Override
+    public List<User> getUsersByActive() {
+       return this.userRepository.getUsersByActive();
     }
 
 }

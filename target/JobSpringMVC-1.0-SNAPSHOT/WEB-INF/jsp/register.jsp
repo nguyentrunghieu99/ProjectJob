@@ -7,6 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:if test="${jobloca == null}">
+    <p>a</p>
+</c:if>
+
+
+
+
+
+
+
+
+
+
 <h1 class="text-center text-danger">ĐĂNG KÝ</h1>
 <c:if test="${errMsg != null}">
     <div class="alert alert-danger">
@@ -14,7 +28,7 @@
     </div>
 </c:if>
 
-<form:form method="post" action="${action}" modelAttribute="user">
+<form:form method="post" action="${action}" modelAttribute="user" enctype="multipart/form-data">
     <div class="form-group">
         <label for="firstname">Họ và tên lót</label>
         <form:input type="text" id="firstname" path="firstName" cssClass="form-control"/>
@@ -51,7 +65,17 @@
         <label for="confirm-password">Xác nhận mật khẩu</label>
         <form:input type="password" id="confirm-password" path="confirmPassword" cssClass="form-control"/>
     </div>
-
+    
+    <div>
+            <label for="file">Thêm avatar</label>
+            <form:input type="file"  path="file" cssClass="form-control" />
+    </div>
+    
+    <div>
+            <label for="filecv">Thêm CV</label>
+            <form:input type="file"  path="filecv" cssClass="form-control" />
+    </div>
+    
     <div>
         <input type="submit" value="Đăng Ký" class="btn btn-danger"/>
     </div>

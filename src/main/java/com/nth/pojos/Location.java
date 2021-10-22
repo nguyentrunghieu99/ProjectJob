@@ -6,12 +6,12 @@
 package com.nth.pojos;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,10 +25,13 @@ public class Location implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+//    @NotNull(message = "{location.name.nullErr}")
     private String name;
+    
+    @OneToMany(mappedBy = "location")
+    private List<JobLoca> jobloca;
 
-    @ManyToMany(mappedBy = "locations")
-    private Set<Job> jobs;
 
     /**
      * @return the id
@@ -59,17 +62,17 @@ public class Location implements Serializable {
     }
 
     /**
-     * @return the jobs
+     * @return the jobloca
      */
-    public Set<Job> getJobs() {
-        return jobs;
+    public List<JobLoca> getJobloca() {
+        return jobloca;
     }
 
     /**
-     * @param jobs the jobs to set
+     * @param jobloca the jobloca to set
      */
-    public void setJobs(Set<Job> jobs) {
-        this.jobs = jobs;
+    public void setJobloca(List<JobLoca> jobloca) {
+        this.jobloca = jobloca;
     }
 
 }

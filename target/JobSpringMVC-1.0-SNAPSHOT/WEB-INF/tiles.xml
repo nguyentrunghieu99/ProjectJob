@@ -41,7 +41,34 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/register.jsp"/>
     </definition>
     
+    <definition name="userinfo" extends="baseLayout" >
+        <put-attribute name="title" value="Thông tin người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/user.jsp"/>   
+    </definition>
     
+    <definition name="edituser" extends="baseLayout" >
+        <put-attribute name="title" value="Chỉnh sửa thông tin user"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/edituser.jsp"/>   
+    </definition>
     
+    <definition name="admin" extends="baseLayout" >
+        <put-attribute name="title" value="Quản trị"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp"/>   
+    </definition>
+    
+    <definition name="managerjob" extends="baseLayout" >
+        <put-attribute name="title" value="Thông tin bài đăng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/manager-job.jsp"/>   
+    </definition>
+    
+    <definition name="userdetail" extends="baseLayout" >
+        <put-attribute name="title" value="Thông tin User"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/userdetail.jsp"/>   
+    </definition>
+    
+    <definition name="managerntd" extends="baseLayout" >
+        <put-attribute name="title" value="Danh sách đăng ký NTD"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/manager-ntd.jsp"/>   
+    </definition>
 
 </tiles-definitions>

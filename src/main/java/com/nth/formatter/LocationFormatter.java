@@ -22,10 +22,11 @@ public class LocationFormatter implements Formatter<Location> {
     }
 
     @Override
-    public Location parse(String locaId, Locale locale) throws ParseException {
+    public Location parse(String locationId, Locale locale) throws ParseException {
         Location l = new Location();
-        l.setId(Integer.parseInt(locaId));
+        l.setId(Integer.parseInt(locationId));
         return l;
     }
+
 
 }
