@@ -10,7 +10,6 @@ com\nth\pojos\Job.class
 com\nth\repository\CommentRepository.class
 com\nth\service\JobService.class
 com\nth\service\LocationService.class
-com\nth\pojos\JobLoca.class
 com\nth\repository\impl\CommentRepositoryImpl.class
 com\nth\service\CommentService.class
 com\nth\controllers\ApiCommentController.class
@@ -34,7 +33,6 @@ com\nth\service\impl\CommentServiceImpl.class
 com\nth\service\impl\JobServiceImpl.class
 com\nth\service\impl\LocationServiceImpl.class
 com\nth\validator\JobNameValidator.class
-com\nth\formatter\JobLocaFormatter.class
 com\nth\pojos\Comment.class
 com\nth\repository\CategoryRepository.class
 com\nth\service\impl\UserServiceImpl.class

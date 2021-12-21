@@ -6,6 +6,7 @@
 package com.nth.service;
 
 import com.nth.pojos.Job;
+import com.nth.pojos.User;
 import java.util.List;
 
 /**

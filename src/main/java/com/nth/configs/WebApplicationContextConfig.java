@@ -6,8 +6,8 @@
 package com.nth.configs;
 
 import com.nth.formatter.CategoryFormatter;
-import com.nth.formatter.JobLocaFormatter;
 import com.nth.formatter.LocationFormatter;
+import com.nth.formatter.UserFormatter;
 import com.nth.validator.JobNameValidator;
 import com.nth.validator.WebAppValidator;
 import java.util.HashSet;
@@ -95,7 +95,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CategoryFormatter());
         registry.addFormatter(new LocationFormatter());
-        registry.addFormatter(new JobLocaFormatter());
+        registry.addFormatter(new UserFormatter());
     }
 
     @Bean

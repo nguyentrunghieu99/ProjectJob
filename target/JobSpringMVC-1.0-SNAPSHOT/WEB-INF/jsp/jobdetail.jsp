@@ -38,7 +38,9 @@
             
         
         
-        
+        <div>
+            <p>Nhà Tuyển Dụng: ${job.user.firstName} ${job.user.lastName}</p>
+        </div>
         
         <div>
             <input type="submit" value="Ứng Tuyển" class="btn btn-danger"/>

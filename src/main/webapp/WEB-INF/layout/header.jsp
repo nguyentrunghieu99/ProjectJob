@@ -29,6 +29,21 @@
                 </a>
                     <a class="nav-link" href="<c:url value="/"/>"><p>${currentUser.userRole}</p></a>
             </li>
+            
+            <li class="nav-item active" style="width: 150px">
+                <c:if test="${currentUser.avatar != null}">
+                <a href="http://localhost:8080/JobSpringMVC/userdetail">
+                    <img class="img-fluid" src="${currentUser.avatar}" alt="${currentUser.username}"/>
+                </a> 
+                </c:if>
+                
+                <c:if test="${currentUser.avatar == null || currentUser.avatar == ''}">
+                <a href="http://localhost:8080/JobSpringMVC/userdetail">
+                    <img class="img-fluid" src="<c:url value="/images/avatar.jpg"/>" alt="${currentUser.username}"/>
+                </a> 
+                </c:if>
+
+            </li>
 
             <li class="nav-item active">
                 <a class="nav-link text-danger" href="/JobSpringMVC/logout">Đăng Xuất</a>

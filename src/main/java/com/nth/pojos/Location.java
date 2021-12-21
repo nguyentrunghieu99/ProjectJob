@@ -29,9 +29,7 @@ public class Location implements Serializable {
 //    @NotNull(message = "{location.name.nullErr}")
     private String name;
     
-    @OneToMany(mappedBy = "location")
-    private List<JobLoca> jobloca;
-
+    
 
     /**
      * @return the id
@@ -60,19 +58,4 @@ public class Location implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * @return the jobloca
-     */
-    public List<JobLoca> getJobloca() {
-        return jobloca;
-    }
-
-    /**
-     * @param jobloca the jobloca to set
-     */
-    public void setJobloca(List<JobLoca> jobloca) {
-        this.jobloca = jobloca;
-    }
-
 }

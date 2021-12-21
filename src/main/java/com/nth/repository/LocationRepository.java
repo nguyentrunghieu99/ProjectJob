@@ -6,7 +6,6 @@
 package com.nth.repository;
 
 import com.nth.pojos.Job;
-import com.nth.pojos.JobLoca;
 import com.nth.pojos.Location;
 import java.util.List;
 
@@ -17,7 +16,5 @@ import java.util.List;
 public interface LocationRepository {
     Location getLocationById(int locaId);
     List<Location> getLocation();
-    List<JobLoca> getJobLoca();
-    boolean addJobLoca(JobLoca jobloca);
     
 }

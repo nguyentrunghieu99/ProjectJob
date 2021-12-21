@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -68,8 +71,14 @@ public class Job implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private Collection<Comment> commentCollection;
     
-    @OneToMany(mappedBy = "job", fetch = FetchType.EAGER)
-    private List<JobLoca> jobloca;
+    @ManyToOne
+    @JoinColumn(name= "location_id")
+    private Location location;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    
 
     /**
      * @return the id
@@ -257,20 +266,33 @@ public class Job implements Serializable {
         this.commentCollection = commentCollection;}
 
     /**
-     * @return the jobloca
+     * @return the location
      */
-    public List<JobLoca> getJobloca() {
-        return jobloca;
+    public Location getLocation() {
+        return location;
     }
 
     /**
-     * @param jobloca the jobloca to set
+     * @param location the location to set
      */
-    public void setJobloca(List<JobLoca> jobloca) {
-        this.jobloca = jobloca;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
 
-    
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+  
 
 }

@@ -12,14 +12,16 @@
 
 <c:url value="/td/jobs" var="action"/>
 
-<c:if test="${errMsg != null}">
+<%--<c:if test="${errMsg != null}">
     <div class="alert alert-danger">${errMsg}</div>
-</c:if>
+</c:if>--%>
 
 <form:form method="post" action="${action}" modelAttribute="job" enctype="multipart/form-data">
 
     <form:errors path="*" cssClass="alert alert-danger" element="div"/>
 
+    <form:hidden path="user" value= "${currentUser.id}"/>
+    
     <div class="form-group">
         <label for="name">Tên công việc</label>
         <form:input type="text" id="name" path="name" cssClass="form-control" />
@@ -57,19 +59,15 @@
         </form:select>
         <form:errors path="category" cssClass="alert alert-danger" element="div"/>
     </div>
-
+    
     <div class="form-group">
-        <label for="jobloca">Địa điểm</label>
-        <form:select id="jobloca" path="jobloca" cssClass="form-control">
+        <label for="loca">Địa điểm</label>
+        <form:select id="loca" path="location" cssClass="form-control">
             <c:forEach var="loca" items="${locations}">
                 <option value="${loca.id}">${loca.name}</option>
             </c:forEach>
         </form:select>
-        <form:errors path="jobloca" cssClass="alert alert-danger" element="div"/>
     </div>
-
-
-
 
     <div class="form-group">
         <label for="address">Địa chỉ</label>
@@ -83,10 +81,11 @@
         <form:input type="file" id="file" path="file" cssClass="form-control" />
         <form:errors path="file" cssClass="alert alert-danger" element="div"/>
     </div> 
-
+    
     <div class="form-group">
         <input type="submit" value="Thêm" class="btn btn-danger""/>
     </div>
-
+    
+   
 
 </form:form>

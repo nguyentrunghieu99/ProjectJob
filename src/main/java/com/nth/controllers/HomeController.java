@@ -53,7 +53,7 @@ public class HomeController {
          model.addAttribute("categories", this.categoryService.getCategories());
          model.addAttribute("locations", this.locationService.getLocation());
          model.addAttribute("currentUser", session.getAttribute("currentUser"));
-         model.addAttribute("jobloca", this.locationService.getJobLoca());
+//         model.addAttribute("jobloca", this.locationService.getJobLoca());
     }   
     
     @RequestMapping(value = "/")
@@ -67,9 +67,7 @@ public class HomeController {
         model.addAttribute("maxIn", maxPageIndex);
         return "index";
     }
-    
-    
-    
+       
     @PostMapping("/")
     public String test(Model model,@ModelAttribute(value = "currentUser")User user){
         this.userDetailsService.applyPost(user);

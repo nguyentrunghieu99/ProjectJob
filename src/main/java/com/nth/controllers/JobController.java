@@ -6,11 +6,13 @@
 package com.nth.controllers;
 
 import com.nth.pojos.Job;
+import com.nth.pojos.User;
 import com.nth.service.CommentService;
 import com.nth.service.JobService;
 import com.nth.service.LocationService;
 import com.nth.validator.WebAppValidator;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,7 +58,7 @@ public class JobController {
     @GetMapping("/td/jobs")
     public String list(Model model) {
         model.addAttribute("job", new Job());
-        model.addAttribute("joblocas", this.locationService.getJobLoca());
+//        model.addAttribute("joblocas", this.locationService.getJobLoca());
         return "job";
     }
 

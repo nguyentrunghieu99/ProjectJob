@@ -8,13 +8,12 @@ package com.nth.service.impl;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.nth.pojos.Job;
-import com.nth.pojos.JobLoca;
 import com.nth.pojos.Location;
+import com.nth.pojos.User;
 import com.nth.repository.JobRepository;
 import com.nth.repository.LocationRepository;
 import com.nth.service.JobService;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -46,13 +45,12 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean addOrUpdate(Job job) {
-        Location l = this.locationRepository.getLocationById(2);
-        Job j = this.jobRepository.getJobById(54);
         try {
             Map r = this.cloudinary.uploader().upload(job.getFile().getBytes(),
                     ObjectUtils.asMap("resource_type", "auto"));
             job.setImage((String) r.get("secure_url"));
             job.setCreateDate(new Date());
+            
            
             return this.jobRepository.addOrUpdate(job);
 

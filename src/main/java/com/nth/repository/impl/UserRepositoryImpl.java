@@ -118,7 +118,4 @@ public class UserRepositoryImpl implements UserRepository{
         Query q = s.createQuery(query);
         return q.getResultList();
     }
-
-  
-
 }

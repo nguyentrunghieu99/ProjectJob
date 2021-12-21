@@ -5,10 +5,7 @@
  */
 package com.nth.repository.impl;
 
-import com.nth.pojos.Comment;
 import com.nth.pojos.Job;
-import com.nth.pojos.JobLoca;
-import com.nth.pojos.Location;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -46,36 +43,30 @@ public class JobRepositoryImpl implements JobRepository {
         Root root = query.from(Job.class);
         query = query.select(root);
         query = query.orderBy(builder.desc(root));
+        
 
         if (!kw.isEmpty()) {
             Predicate p = builder.like(root.get("name").as(String.class),
                     String.format("%%%s%%", kw));
-
             query = query.where(p);
-
+            
         }
-
+        
         if (cat > 0) {
             Predicate p1 = builder.equal(root.get("category"), cat);
-            query = query.where(p1);
+            query = query.where(builder.and(p1));
         }
 
         if (loca > 0) {
-            Root rootl = query.from(Location.class);
-            Root rootjl = query.from(JobLoca.class);
-
-            Predicate p1 = builder.equal(root.get("id"), rootjl.get("job"));
-            Predicate p2 = builder.equal(rootl.get("id"), rootjl.get("location"));
-            Predicate p3 = builder.equal(rootl.get("id"), loca);
-            query = query.where(builder.and(p1, p2, p3));
+          Predicate p2 = builder.equal(root.get("location"),loca);
+            query = query.where(p2);
         }
+        
         Query q = s.createQuery(query);
 
         q.setMaxResults(max);
         q.setFirstResult((page - 1) * max);
-
         return q.getResultList();
-
     }
 
     @Override
@@ -110,17 +101,12 @@ public class JobRepositoryImpl implements JobRepository {
         }
 
         if (loca > 0) {
-            Root rootl = query.from(Location.class);
-            Root rootjl = query.from(JobLoca.class);
-            Predicate p1 = builder.equal(root.get("id"), rootjl.get("job"));
-            Predicate p2 = builder.equal(rootl.get("id"), rootjl.get("location"));
-            Predicate p3 = builder.equal(rootl.get("id"), loca);
-            query = query.where(builder.and(p1, p2, p3));
+            Predicate p1 = builder.equal(root.get("location"), loca);
+            query = query.where(p1);
 
         }
         query = query.multiselect(builder.count(root.get("id").as(Integer.class)));
         Query q = s.createQuery(query);
-
         return Long.parseLong(q.getSingleResult().toString());
     }
 

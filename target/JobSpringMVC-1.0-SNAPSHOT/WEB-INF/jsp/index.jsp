@@ -10,19 +10,18 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-
-<c:forEach items="${jobloca}" var="u">
-    <p>${id}</p>
-</c:forEach>
-
-
 <c:url value="/" var="action"/>
 <sec:authorize access="hasAnyRole('ROLE_USER')">
-    <c:if test="${currentUser.active == null}">
+    
+    <c:if test="${currentUser.active == null && currentUser.avatar == null}">
+        <h1>Vui lòng thiết lập avatar nếu muốn trở thành nhà tuyển dụng</h1>
+    </c:if>
+    
+    <c:if test="${currentUser.active == null && currentUser.avatar != null}">
         <form:form method="post" action="${action}" modelAttribute="currentUser" enctype="multipart/form-data">
             <table border="0" cellpadding="5">
                 <tr>
-                    <td colspan="2"><input type="submit" class="btn btn-danger" value="ĐĂNG KÝ LÀM NHÀ TUYỂN DỤNG" onclick="abc()"/></td>
+                    <td colspan="2"><input type="submit" class="btn btn-danger" value="ĐĂNG KÝ LÀM NHÀ TUYỂN DỤNG"/></td>
                 </tr>
             </table>
         </form:form>
@@ -32,19 +31,6 @@
     </c:if>
 </sec:authorize>
 
-<form>
-    <a class="btn btn-danger">Apply</a>
-    <h1>${userId}</h1>
-</form>
-
-<c:if test="${currentUser != null}">
-    ${currentUser.active}
-</c:if>
-
-<c:if test="${currentUser == null}">
-    <h1>null</h1>
-</c:if>
-
 <c:if test="${success != null}">
     <div  class="alert alert-success alert-dismissible " style="text-align: center">
         <h1>${success}</h1>
@@ -53,6 +39,7 @@
 
 <form action="">
     <select name="cat">
+        <option value="">Tất cả lĩnh vực</option>
         <c:forEach items="${categories}" var="c">
             <option value="${c.id}">${c.name}</option>
         </c:forEach>
@@ -62,6 +49,7 @@
 
 <form action="">
     <select name="loca">
+        <option value="">Toàn quốc</option>
         <c:forEach items="${locations}" var="l">
             <option value="${l.id}">${l.name}</option>
         </c:forEach>
@@ -122,7 +110,7 @@
                 </c:if>
             </div>
             <div class="job-list-wrapper__item__03">
-                <h2>Hồ Chí Minh</h2>
+                <h2>${j.location.name}</h2>
                 <div class="my-date">
                     <span>Đăng vào: </span>
                     <i>${j.createDate}</i>
