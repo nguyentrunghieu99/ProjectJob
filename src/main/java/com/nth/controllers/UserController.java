@@ -7,9 +7,9 @@ package com.nth.controllers;
 
 import com.nth.pojos.User;
 import com.nth.service.UserService;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,64 +58,65 @@ public class UserController {
 
     @GetMapping("/admin/user")
     public String userManager(Model model,
-            @RequestParam(value = "username", required = false, defaultValue = "") String username){
+            @RequestParam(value = "username", required = false, defaultValue = "") String username) {
 //            @RequestParam(value = "role", required = false, defaultValue = "")String role) {
         model.addAttribute("users", this.userDetailsService.getUsers(username));
 //        model.addAttribute("users", this.userDetailsService.getUsers(role));
         return "userinfo";
     }
 
+    @PostMapping("/admin/user")
+    public String deleteUser(HttpServletRequest request) {
+        this.userDetailsService.deleteUser((Integer.parseInt(request.getParameter("deleteUser"))));
+        return "redirect:/admin/user";
+    }   
+
     @GetMapping("/admin/user/edit")
-    public String editUser(Model model,
-            @RequestParam(value = "id", required = false, defaultValue = "") int Id) {
-        model.addAttribute("userr", this.userDetailsService.getUserById(Id));
+    public String adminEditUser(Model model) {
         return "edituser";
     }
 
     @PostMapping("/admin/user/edit")
-    public String updateUser(Model model, @ModelAttribute(value = "userr") User user) {
-        String errMsg = "";
+    public String editUser(Model model, HttpServletRequest request) {
+        model.addAttribute("user", this.userDetailsService.getUserById(Integer.parseInt(request.getParameter("updateUser"))));
+        return "edituser";
+    }
+
+    @PostMapping("/admin/user/edit-success")
+    public String updateUser2(Model model,@ModelAttribute(value = "user")User user) {
         this.userDetailsService.uppdateUser(user);
         return "redirect:/admin/user";
-
     }
 
-    @GetMapping("/admin/user/delete")
-    public String deleteUser(Model model, @RequestParam(value = "id", required = false) int id) {
-        this.userDetailsService.deleteUser(id);
-        return "redirect:/admin/user";
-    }
-    
-    
-    @RequestMapping("/userdetail")
-    public String getuserDetail(Model model, HttpSession session){
+    @RequestMapping("/userdetail/edituser")
+    public String userEditUser(Model model, HttpSession session) {
         model.addAttribute("currentUser", session.getAttribute("currentUser"));
+        return "user-edituser";
+    }
+
+    @PostMapping("/userdetail/edituser")
+    public String editUser(@ModelAttribute(value = "currentUser") User user) {
+        this.userDetailsService.uppdateUser(user);
+        return "redirect:/userdetail";
+    }
+    
+    @RequestMapping(path = "/userdetail")
+    public String userDetail(){
         return "userdetail";
     }
-    
-    
-    @PostMapping("/userdetail")
-    public String userDetail(@ModelAttribute(value = "currentUser")User user){
-        this.userDetailsService.uppdateUser(user);
-        return "redirect:/";
-    }
-    
+
     @GetMapping("/admin/ntd")
-    public String getNtdManager(Model model){
+    public String getNtdManager(Model model) {
         model.addAttribute("users", this.userDetailsService.getUsersByActive());
         return "managerntd";
     }
-    
+
     @GetMapping("/admin/ntd/{id}")
     public String NtdManager(Model model,
-            @PathVariable(value = "id")int id,
-            @RequestParam(value = "result",defaultValue = "null")boolean result){
+            @PathVariable(value = "id") int id,
+            @RequestParam(value = "result", defaultValue = "null") boolean result) {
         model.addAttribute("accept", this.userDetailsService.acceptNtd(id, result));
         return "redirect:/admin/ntd";
     }
-    
 
-    
-    
-    
 }

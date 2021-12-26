@@ -7,19 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<div class="container p-top">
 <c:if test="${jobloca == null}">
     <p>a</p>
 </c:if>
-
-
-
-
-
-
-
-
-
 
 <h1 class="text-center text-danger">ĐĂNG KÝ</h1>
 <c:if test="${errMsg != null}">
@@ -51,6 +42,25 @@
         <label for="phone">Số điện thoại</label>
         <form:input type="text" id="phone" path="phone" cssClass="form-control"/>
     </div>
+    
+    <div class="form-group">
+        <label for="cate">Nghành nghề quan tâm</label>
+        <form:select id="cate" path="category" cssClass="form-control">
+            <c:forEach var="cat" items="${categories}">
+                <option value="${cat.id}">${cat.name}</option>
+            </c:forEach>
+        </form:select>
+        <form:errors path="category" cssClass="alert alert-danger" element="div"/>
+    </div>
+    
+    <div class="form-group">
+        <label for="loca">Thành phố đang sống</label>
+        <form:select id="loca" path="location" cssClass="form-control">
+            <c:forEach var="loca" items="${locations}">
+                <option value="${loca.id}">${loca.name}</option>
+            </c:forEach>
+        </form:select>
+    </div>
 
     <div class="form-group">
         <label for="username">Tên đăng nhập</label>
@@ -80,3 +90,4 @@
         <input type="submit" value="Đăng Ký" class="btn btn-danger"/>
     </div>
 </form:form>
+</div>

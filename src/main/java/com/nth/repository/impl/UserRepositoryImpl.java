@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository{
         if (!username.isEmpty()) {
             Predicate p1 = builder.like(root.get("username").as(String.class), String.format("%%%s%%", username));
             Predicate p2 = builder.equal(root.get("userRole").as(String.class), username.trim());
-            query = query.where(builder.or(p1,p2));
+            query = query.where(builder.or(p1, p2));
         }
         Query q = s.createQuery(query);
         return q.getResultList();
@@ -85,22 +85,27 @@ public class UserRepositoryImpl implements UserRepository{
     @Override
     public boolean updateUser(User user) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
-        s.update(user);
-        return true;
+        try {
+            s.update(user);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return false;
     }
 
     @Override
-    public boolean acceptNtd(User user,boolean b) {
+    public boolean acceptNtd(User user, boolean b) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
-        if(b==true){
-        user.setActive(true);
-        user.setUserRole("ROLE_NTD");
+        if (b == true) {
+            user.setActive(true);
+            user.setUserRole("ROLE_NTD");
         }
-        if(b==false){
+        if (b == false) {
             user.setActive(null);
             user.setUserRole("ROLE_USER");
         }
-        
+
         s.update(user);
         return true;
     }
@@ -112,10 +117,11 @@ public class UserRepositoryImpl implements UserRepository{
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
         query = query.select(root);
-        
+
         Predicate p = builder.equal(root.get("active").as(Boolean.class), false);
         query = query.where(p);
         Query q = s.createQuery(query);
         return q.getResultList();
     }
+
 }

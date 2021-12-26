@@ -72,7 +72,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/td/**").access("hasAnyRole('ROLE_ADMIN','ROLE_NTD')")
                 .antMatchers("/userdetail").access("hasAnyRole('ROLE_ADMIN','ROLE_NTD','ROLE_USER')")
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/apply/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')");
 
         http.csrf().disable();
     }

@@ -8,8 +8,9 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/admin/ntd" var="action"/>
-<div class="form-group" align="center">
-    <table border="1" cellpadding="5" style="background-color: activeborder">
+
+<div class="form-group container p-top" align="center">
+    <table border="1" cellpadding="5" style="background-color: activeborder" class="table">
         <tr style="background-color: activecaption">
             <th>ID</th>
             <th>Avatar</th>
@@ -47,4 +48,6 @@
             </tr>
         </c:forEach>    
     </table>
+    
+    
 </div>

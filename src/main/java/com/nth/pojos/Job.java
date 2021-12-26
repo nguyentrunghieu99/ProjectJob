@@ -53,16 +53,16 @@ public class Job implements Serializable {
     @Min(value = 100000, message = "{job.pay.minErr}")
     @Max(value = 100000000, message = "{job.pay.maxErr}")
     private BigDecimal pay;
-    private String image;
+//    private String image;
     @Column(name = "created_date")
     private Date createDate;
     private Boolean active;
 
-    @Transient
-    @NotNull(message = "file")
-    private MultipartFile file;
+//    @Transient
+//    @NotNull(message = "file")
+//    private MultipartFile file;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     @NotNull(message = "{job.category.nullErr}")
     private Category category;
@@ -71,11 +71,11 @@ public class Job implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "job")
     private Collection<Comment> commentCollection;
     
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name= "location_id")
     private Location location;
     
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
     
@@ -122,19 +122,7 @@ public class Job implements Serializable {
         this.description = description;
     }
 
-    /**
-     * @return the image
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
+   
 
     /**
      * @return the createDate
@@ -167,19 +155,7 @@ public class Job implements Serializable {
         this.category = category;
     }
 
-    /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
+ 
 
 
     /**
@@ -288,11 +264,14 @@ public class Job implements Serializable {
 
     /**
      * @param user the user to set
-     */
+     *  */
     public void setUser(User user) {
         this.user = user;
     }
-
-  
-
+   
+    /**
+     * @return the applications
+     */
+    
+    
 }

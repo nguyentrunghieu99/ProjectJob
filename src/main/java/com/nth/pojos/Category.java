@@ -8,6 +8,7 @@ package com.nth.pojos;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,9 +28,6 @@ public class Category implements Serializable {
     private int id;
     private String name;
     private String description;
-
-    @OneToMany(mappedBy = "category")
-    private List<Job> jobs;
 
     /**
      * @return the id
@@ -73,18 +71,5 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    /**
-     * @return the jobs
-     */
-    public List<Job> getJobs() {
-        return jobs;
-    }
-
-    /**
-     * @param jobs the jobs to set
-     */
-    public void setJobs(List<Job> jobs) {
-        this.jobs = jobs;
-    }
 
 }

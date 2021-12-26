@@ -53,7 +53,7 @@ public class HomeController {
          model.addAttribute("categories", this.categoryService.getCategories());
          model.addAttribute("locations", this.locationService.getLocation());
          model.addAttribute("currentUser", session.getAttribute("currentUser"));
-//         model.addAttribute("jobloca", this.locationService.getJobLoca());
+         model.addAttribute("jobForUser",this.jobService.getJobByUser((User)session.getAttribute("currentUser")));
     }   
     
     @RequestMapping(value = "/")

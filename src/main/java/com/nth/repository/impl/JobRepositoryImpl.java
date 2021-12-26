@@ -43,25 +43,24 @@ public class JobRepositoryImpl implements JobRepository {
         Root root = query.from(Job.class);
         query = query.select(root);
         query = query.orderBy(builder.desc(root));
-        
 
         if (!kw.isEmpty()) {
             Predicate p = builder.like(root.get("name").as(String.class),
                     String.format("%%%s%%", kw));
             query = query.where(p);
-            
+
         }
-        
+
         if (cat > 0) {
             Predicate p1 = builder.equal(root.get("category"), cat);
             query = query.where(builder.and(p1));
         }
 
         if (loca > 0) {
-          Predicate p2 = builder.equal(root.get("location"),loca);
+            Predicate p2 = builder.equal(root.get("location"), loca);
             query = query.where(p2);
         }
-        
+
         Query q = s.createQuery(query);
 
         q.setMaxResults(max);
@@ -115,6 +114,54 @@ public class JobRepositoryImpl implements JobRepository {
         Session s = this.sessionFactory.getObject().getCurrentSession();
         return s.get(Job.class, id);
 
+    }
+
+    @Override
+    public List<Job> getJobsbyUser(int cate, int loca) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<Job> query = builder.createQuery(Job.class);
+        Root root = query.from(Job.class);
+        query = query.select(root);
+        query = query.orderBy(builder.desc(root));
+
+        Predicate p1 = builder.equal(root.get("category"), cate);
+        Predicate p2 = builder.equal(root.get("location"), loca);
+        query = query.where(builder.and(p1, p2));
+
+        Query q = s.createQuery(query);
+
+        q.setMaxResults(5);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Job> getJobsbyNTD(int user) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<Job> query = builder.createQuery(Job.class);
+        Root root = query.from(Job.class);
+        query = query.select(root);
+        query = query.orderBy(builder.desc(root));
+
+        Predicate p = builder.equal(root.get("user"), user);
+        query = query.where(p);
+
+        Query q = s.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Override
+    public boolean deleteJob(Job job) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            s.delete(job);
+            System.out.print("Xóa thành công!!!");
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 }

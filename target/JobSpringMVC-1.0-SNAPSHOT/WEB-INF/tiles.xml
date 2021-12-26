@@ -13,7 +13,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="..." />
         <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
-        <put-attribute name="content" value="Day la content"/>
+        <put-attribute name="content" value="There is content"/>
+    </definition>
+    
+    <definition name="managerjob" extends="baseLayout" >
+        <put-attribute name="title" value="Thông tin bài đăng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/manager-job.jsp"/>   
     </definition>
     
     <definition name="index" extends="baseLayout" >
@@ -56,10 +61,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp"/>   
     </definition>
     
-    <definition name="managerjob" extends="baseLayout" >
-        <put-attribute name="title" value="Thông tin bài đăng"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/manager-job.jsp"/>   
-    </definition>
+    
     
     <definition name="userdetail" extends="baseLayout" >
         <put-attribute name="title" value="Thông tin User"/>
@@ -70,5 +72,42 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Danh sách đăng ký NTD"/>
         <put-attribute name="content" value="/WEB-INF/jsp/manager-ntd.jsp"/>   
     </definition>
+    
+    <definition name="jobapply" extends="baseLayout" >
+        <put-attribute name="title" value="Nội dung ứng tuyển"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/job-apply.jsp"/>   
+    </definition>
+    
+    <definition name="ntd-jobs" extends="baseLayout" >
+        <put-attribute name="title" value="Quản lý tin đăng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/ntd-jobs.jsp"/>   
+    </definition>
+    
+    <definition name="ntd-apply" extends="baseLayout" >
+        <put-attribute name="title" value="Danh sách ứng tuyển"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/ntd-apply.jsp"/>   
+    </definition>
+    
+    <definition name="cate-stats" extends="baseLayout" >
+        <put-attribute name="title" value="Thống kê theo danh mục"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/cate-stats.jsp"/>   
+    </definition>
+    
+    <definition name="job-stats" extends="baseLayout" >
+        <put-attribute name="title" value="Thống kê theo bài đăng"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/job-stats.jsp"/>   
+    </definition>
+    
+    <definition name="application-stats" extends="baseLayout" >
+        <put-attribute name="title" value="Thống kê theo thời gian"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/application-stats.jsp"/>   
+    </definition>
+    
+    <definition name="user-edituser" extends="baseLayout" >
+        <put-attribute name="title" value="Thay đổi thông tin"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/user-edituser.jsp"/>   
+    </definition>
+    
+    
 
 </tiles-definitions>

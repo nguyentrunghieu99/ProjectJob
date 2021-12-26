@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,10 +43,11 @@ public class User implements Serializable {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    private int age;    
+    private int age;
     private String email;
     private String phone;
     private String avatar;
+    @NotNull(message = "{job.name.nullErr}")
     private String username;
     private String password;
     private String cv;
@@ -55,14 +57,22 @@ public class User implements Serializable {
 
     @Transient
     private String confirmPassword;
-    
+
     @Transient
+    @NotNull(message = "{job.image.nullErr}")
     private MultipartFile file;
-    
+
     @Transient
+    @NotNull(message = "{job.image.nullErr}")
     private MultipartFile filecv;
-    
-    
+
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne()
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     /**
      * @return the id
@@ -272,6 +282,34 @@ public class User implements Serializable {
      */
     public void setFilecv(MultipartFile filecv) {
         this.filecv = filecv;
+    }
+
+    /**
+     * @return the category
+     */
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     * @param category the category to set
+     */
+    /**
+     * @return the location
+     */
+    public Location getLocation() {
+        return location;
+    }
+
+    /**
+     * @param location the location to set
+     */
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }

@@ -5,6 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="jumbotron bg-success">
-    <strong>Trung Hiếu</strong> CoppyRight@...
+<div class="bg-success c-footer">
+    <strong class="container">CoppyRight@...</strong> by Hieu
 </div>

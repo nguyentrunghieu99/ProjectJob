@@ -18,4 +18,7 @@ public interface JobService {
     List<Job> getJobs(String kw, int page,int cat, int loca);
     long countJob(String kw, int cat, int loca);
     boolean addOrUpdate(Job job);
+    List<Job> getJobByUser(User user);
+    List<Job> getJobByNTD(User user);
+    boolean deleteJob(int job);
 }

@@ -25,20 +25,17 @@ function addComment(jobId, userId) {
         let area = document.getElementById("commentArea");
         area.innerHTML = `
         <div class="row">
-                <div class="col-md-2" style="padding: 10px">
-                    <img class="rounded-circle img-fluid" src="https://res.cloudinary.com/springmvc/image/upload/v1631778579/cazkgssjiy7flmuma25g.png" alt="name"/>
-                </div>
-                <div class="col-md-10 my-date">
-                    <p>Name: ${data.user.username}</p>
-                    <p>${data.content}</p>
-                    <i>${moment(data.createDate).fromNow()}</i>
-                </div>
-            </div>
-    `
-                + area.innerHTML
-    })
+                            <div class="col-md-2" style="padding: 10px">
+                                <img class="rounded-circle img-fluid" src="<c:url value="${data.user.avatar}"/>" alt="${data.user.lastName}"/>
+                            </div>
+                            <div class="col-md-10 my-date">
+                                <p>${data.user.firstName} ${data.user.lastName}</p>
+                                <p>${data.content}</p>
+                                <i>${moment(data.createDate).fromNow()}</i>
+                            </div>
+                        </div>
+        ` +
+                area.innerHTML
+    });
 
 }
-function abc(){
-            alert("Nộp đơn ứng tuyển thành công!!");
-        }

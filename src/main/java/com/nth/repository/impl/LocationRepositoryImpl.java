@@ -45,25 +45,4 @@ public class LocationRepositoryImpl implements LocationRepository {
         return q.getResultList();
     }
 
-//    @Override
-//    public List<JobLoca> getJobLoca() {
-//        Session s = this.sessionFactory.getObject().getCurrentSession();
-//        Query q = s.createQuery("From JobLoca");
-//        return q.getResultList();
-//    }
-
-//    @Override
-//    public boolean addJobLoca(JobLoca jobloca) {
-//        Session session = this.sessionFactory.getObject().getCurrentSession();
-//        try {
-//            session.save(jobloca);
-//            System.out.print("Đăng tin thành công!!!");
-//            return true;
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        return false;
-//    }
-
-
 }

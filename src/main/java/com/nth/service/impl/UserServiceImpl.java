@@ -9,6 +9,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.google.protobuf.Message;
 import com.nth.pojos.User;
+import com.nth.repository.JobRepository;
 import com.nth.repository.UserRepository;
 import com.nth.service.UserService;
 import java.io.IOException;
@@ -37,6 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private JobRepository jobRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -95,17 +99,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void uppdateUser(User user) {
 
-        String pass = user.getPassword();
-        if (pass.length() < 50) {
-            user.setPassword(this.passwordEncoder.encode(pass));
-        }
-
-        if (pass.length() > 50) {
-            user.setPassword(pass);
-        }
-
-        if (!user.getFile().isEmpty()) {
+        if (user.getFile().isEmpty()||user.getFile()== null) {
             try {
+                user.setAvatar("");
                 Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
                 user.setAvatar((String) r.get("secure_url"));;
@@ -114,8 +110,9 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        if (!user.getFilecv().isEmpty()) {
+        if (user.getFilecv().isEmpty()||user.getFilecv()== null) {
             try {
+                user.setCv("");
                 Map cv = this.cloudinary.uploader().upload(user.getFilecv().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
                 user.setCv((String) cv.get("secure_url"));
@@ -155,5 +152,4 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsersByActive() {
        return this.userRepository.getUsersByActive();
     }
-
 }

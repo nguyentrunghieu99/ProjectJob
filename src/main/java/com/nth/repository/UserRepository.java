@@ -22,5 +22,4 @@ public interface UserRepository {
     void deleteUser(int Id);
     boolean acceptNtd(User user,boolean b);
     List<User> getUsersByActive();
-    
 }

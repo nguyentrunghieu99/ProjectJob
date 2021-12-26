@@ -33,9 +33,6 @@ public class JobNameValidator implements Validator {
             errors.rejectValue("name", "job.name.nullErr");
         }
 
-        if (j.getFile().isEmpty()) {
-            errors.rejectValue("file", "job.image.nullErr");
         }
 
     }
-}

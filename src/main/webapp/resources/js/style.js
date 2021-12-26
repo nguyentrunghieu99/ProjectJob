@@ -5,7 +5,7 @@
  */
 
 window.onload = function () {
-    let dates = document.querySelectorAll(".my-date > i,span");
+    let dates = document.querySelectorAll(".my-date > i,span,p");
     for (let i = 0; i < dates.length; i++) {
         let d = dates[i];
         let c = moment(d.innerText).fromNow();
