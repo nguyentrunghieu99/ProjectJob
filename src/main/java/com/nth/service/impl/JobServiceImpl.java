@@ -88,12 +88,14 @@ public class JobServiceImpl implements JobService {
     @Override
     public boolean deleteJob(int job) {
         try {
-            Job j = this.jobRepository.getJobById(job);
-            return this.jobRepository.deleteJob(j);
+            Job j;
+            j = this.jobRepository.getJobById(job);
+            this.jobRepository.deleteJob(j);
+            return true;
         } catch (Exception ex) {
-            System.err.println("==ADD PRODUCT==" + ex.getMessage());
+            System.err.println("==DEL JOB==" + ex.getMessage());
+            return false;
         }
-        return false;
     }
 
 }

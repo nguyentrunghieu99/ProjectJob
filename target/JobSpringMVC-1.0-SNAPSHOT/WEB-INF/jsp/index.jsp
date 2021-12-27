@@ -10,6 +10,8 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+
+
 <div class="page-header p-top">
     <div class="container">
         <div class="page-header__banner">
@@ -23,16 +25,6 @@
         </div>
     </div>
 </div>
-
-    
-<c:forEach items="${jobForUser}" var="u">
-    <h1>${u.id}</h1>
-</c:forEach>
-
-<c:forEach items="${jobForNTD}" var="u">
-    <h1>${u.id}</h1>
-</c:forEach>
-
 
 <section class="p-job">
     <div class="container">
@@ -87,7 +79,7 @@
                 <c:forEach items="${jobs}" var="j">
                     <a href="<c:url value="/jobs/"/>${j.id}" class="c-itemJob">
                         <div class="c-itemJob__logo">
-                            <img src="${currentUser.avatar}" alt="null">
+                            <img src="${j.user.avatar}" alt="null">
                         </div>
                         <div class="c-itemJob__content">
                             <h3>${j.name}</h3>
@@ -113,23 +105,32 @@
                 </c:forEach>
             </div>
             <div class="new">
+                <sec:authorize access="hasAnyRole('ROLE_USER')">
                 <div class="new-item--job">
-                        <h3>Việc làm dành cho bạn</h3>
+                    <h3>Việc làm dành cho bạn</h3>
                 </div>
+                </sec:authorize>
                 <c:forEach items="${jobForUser}" var="j">
-                    <div class="new-item">
-                        
-                        <h3>${j.name}</h3>
-                        <p>${j.location.name}</p>
-                        <p>Lương: ${j.pay} Triệu</p>
-                        
-                    </div>
-                        
-                    
+                    <a href="<c:url value="/jobs/"/>${j.id}">
+                        <div class="new-item" >
+                            <img class="c-itemJob__logo"src="${j.user.avatar}" alt="null">
+                            <h3>Tên Job: ${j.name}</h3>
+                            <p>Địa điểm: ${j.location.name}</p>
+                            <c:if test="${j.pay != null}">
+                                <p>Lương: ${j.pay} VNĐ</p>
+                            </c:if>
+
+                            <c:if test="${j.pay == null}">
+                                <p>Lương: Thỏa thuận</p>
+                            </c:if>
+                            <p>${j.createDate}</p>
+
+                        </div>
+                    </a>
                 </c:forEach>
             </div>
         </div>
 
-        
+
 </section>
 

@@ -8,7 +8,6 @@
 <table class="table container ">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Full Name</th>
                     <th>Age</th>
                     <th>Phone</th>
@@ -18,17 +17,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>${currentUser.id}</td>
                     <td>${currentUser.firstName} ${currentUser.lastName}</td>
                     <td>${currentUser.age}</td>
                     <td>${currentUser.phone}</td>
                     <td>${currentUser.username}</td>
                     <td>${currentUser.userRole}</td>
                 </tr>
- 
-
-                
             </tbody>
         </table>
+                    <a href="<c:url value="/userdetail/edituser"/>" class="btn btn-danger">Đổi thông tin</a>
 </div>
-

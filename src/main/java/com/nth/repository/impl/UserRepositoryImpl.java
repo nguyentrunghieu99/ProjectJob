@@ -97,15 +97,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public boolean acceptNtd(User user, boolean b) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
-        if (b == true) {
-            user.setActive(true);
-            user.setUserRole("ROLE_NTD");
-        }
-        if (b == false) {
-            user.setActive(null);
-            user.setUserRole("ROLE_USER");
-        }
-
+//        if (b == true) {
+//            user.setActive(2);
+//            user.setUserRole("ROLE_NTD");
+//        }
+//        if (b == false) {
+//            user.setActive(0);
+//        }
         s.update(user);
         return true;
     }
@@ -118,7 +116,7 @@ public class UserRepositoryImpl implements UserRepository {
         Root root = query.from(User.class);
         query = query.select(root);
 
-        Predicate p = builder.equal(root.get("active").as(Boolean.class), false);
+        Predicate p = builder.equal(root.get("active").as(Integer.class), 1);
         query = query.where(p);
         Query q = s.createQuery(query);
         return q.getResultList();

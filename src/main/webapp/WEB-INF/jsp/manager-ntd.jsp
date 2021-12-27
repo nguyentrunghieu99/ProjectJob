@@ -41,13 +41,20 @@
                 <td>${u.username}</td>
 
 
-                 <td>
-                     <a class="btn btn-danger" href="<c:url value="/admin/ntd/"/>${u.id}?result=true">Đồng ý</a>
-                     <a class="btn btn-danger" href="<c:url value="/admin/ntd/"/>${u.id}?result=false">Từ chối</a>
-                 </td>
+                <td>
+                    <form method="post" action="/JobSpringMVC/admin/ntd/agree">
+                        <input type="hidden" name="agreeNTD" value="${u.id}">
+                        <input type="submit" value="Đồng ý" class="btn btn-danger"/>
+                    </form>
+                        <br>
+                    <form method="post" action="/JobSpringMVC/admin/ntd/refuse">
+                        <input type="hidden" name="refuseNTD" value="${u.id}">
+                        <input type="submit" value="Từ chối" class="btn btn-danger"/>
+                    </form>
+                </td>
             </tr>
         </c:forEach>    
     </table>
-    
-    
+
+
 </div>

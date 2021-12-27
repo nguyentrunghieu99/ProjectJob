@@ -7,7 +7,6 @@ package com.nth.service;
 
 import com.nth.pojos.User;
 import java.util.List;
-import java.util.Set;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
@@ -16,12 +15,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService{
     boolean addUser(User user);
-    void uppdateUser(User user);
+    void uppdateUser(User user,String pass);
     List<User> getUsers(String username);
     List<User> getUsers();
     User getUserById(int userId);
     void deleteUser(int Id);
-    boolean acceptNtd(int userId,boolean b);
-    void applyPost(User user);
+    void sendAppliNtd(User user);
     List<User> getUsersByActive();
+    void agreeNtd(int userId);
+    void refuseNtd(int userId);
 }

@@ -12,7 +12,7 @@
 <header class="c-header">
 <div class="container">
     <div class="c-header__main">
-
+        <sec:authorize access="hasAnyRole('ROLE_NTD','ROLE_ADMIN','ROLE_USER')">
         <div class="c-header__left">
             <img src="${currentUser.avatar}" alt="${currentUser.username}">
             <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -24,6 +24,7 @@
                         </c:if>
                     </p>
         </div>
+        </sec:authorize>
 
         <div class="c-header__right">
             <c:if test="${pageContext.request.userPrincipal.name == null}">
@@ -46,13 +47,13 @@
                 <a href="<c:url value="/admin"/>" class="c-btn c-btn--login">Quản Trị</a>
             </sec:authorize>
 
-            <sec:authorize access="hasAnyRole('ROLE_USER')">
-                <c:if test="${currentUser.active == null && currentUser.avatar != null}">
+            <sec:authorize access="hasRole('ROLE_USER')">
+                <c:if test="${currentUser.active == 0}">
                     <form:form method="post" action="" modelAttribute="currentUser">
                         <input type="submit" class="c-btn c-btn--recruitment" value="Đăng Ký Nhà Tuyển Dụng"/></td
                     </form:form>
                 </c:if>
-                <c:if test="${currentUser.active == Boolean.FALSE}">
+                <c:if test="${currentUser.active == 1}">
                     <h2 class="c-btn c-btn--login">Đang Đợi Xét Duyệt</h2>
                 </c:if>
             </sec:authorize>

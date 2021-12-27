@@ -160,8 +160,8 @@ public class JobRepositoryImpl implements JobRepository {
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return false;
         }
-        return false;
     }
 
 }

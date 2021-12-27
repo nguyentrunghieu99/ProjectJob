@@ -8,6 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 
@@ -16,20 +17,20 @@
         <a href="<c:url value="/"/>" class="crumbs__name">Trang chủ</a>
         <p class="crumbs__name">Việc làm gì đó</p>
     </div>
-        
+
     <div class="main-info">
         <div class="container">
             <div class="box">
                 <div class="box__logo">
-                    <img src="${currentUser.avatar}" alt="${currentUser.firstName} ${currentUser.lastName}">
+                    <img src="${job.user.avatar}" alt="${currentUser.firstName} ${currentUser.lastName}">
                 </div>
-                
+
                 <div class="box__text">
 
                     <h3>Tên Job: ${job.name}</h3>
                     <p>Người đăng: ${currentUser.firstName} ${currentUser.lastName}</p>
                 </div>
-                
+
                 <div class="btn">
                     <c:if test="${currentUser.cv=='' || currentUser.cv==null }">
                         <div>
@@ -109,14 +110,14 @@
                     </ul>
                 </div>
             </div>
-                        
+
             <div class="job-desc">
                 <div class="job-desc__item">
                     <h3>Mô tả công việc</h3>
                     <ul>
                         <c:forTokens items="${job.description}" delims="." var="des">
                             <li>${des}</li>
-                        </c:forTokens>
+                            </c:forTokens>
                     </ul>
                 </div>
                 <div class="job-desc__item">
@@ -138,12 +139,14 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <textarea class="form-control" id="commentId" placeholder="Nhap danh gia cua ban"></textarea>
-                <form:errors path="content" cssClass="alert alert-danger" element="div"/>
-                <br>
-                <input type="submit" value="Gui danh gia" onclick="addComment(${job.id},${currentUser.id})" class="btn btn-danger"/>
-            </div>
+            <sec:authorize access="hasRole('ROLE_USER')">
+                <div class="form-group">
+                    <textarea class="form-control" id="commentId" placeholder="Nhap danh gia cua ban"></textarea>
+                    <form:errors path="content" cssClass="alert alert-danger" element="div"/>
+                    <br>
+                    <input type="submit" value="Gui danh gia" onclick="addComment(${job.id},${currentUser.id})" class="btn btn-danger"/>
+                </div>
+            </sec:authorize>
 
 
 
@@ -187,7 +190,7 @@
 
                 <div class="list-job">
                     <c:forEach items="${jobForUser}" var="j">
-                        <a href="/page" class="c-itemJob">
+                        <a href="<c:url value="/jobs/${j.id}"/>" class="c-itemJob">
                             <div class="c-itemJob__logo">
                                 <img src="null" alt="#">
                             </div>
@@ -195,9 +198,9 @@
                                 <h3>${j.name}</h3>
                                 <ul>
                                     <c:forTokens items="${j.requirement}" delims="." var="require">
-                                    <li>${require}</li>
-                                    </c:forTokens>
-                                    
+                                        <li>${require}</li>
+                                        </c:forTokens>
+
                                 </ul>
                             </div>
                             <div class="c-itemJob__info">

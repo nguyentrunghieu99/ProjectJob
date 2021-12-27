@@ -59,9 +59,7 @@ public class UserController {
     @GetMapping("/admin/user")
     public String userManager(Model model,
             @RequestParam(value = "username", required = false, defaultValue = "") String username) {
-//            @RequestParam(value = "role", required = false, defaultValue = "")String role) {
         model.addAttribute("users", this.userDetailsService.getUsers(username));
-//        model.addAttribute("users", this.userDetailsService.getUsers(role));
         return "userinfo";
     }
 
@@ -83,21 +81,22 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/edit-success")
-    public String updateUser2(Model model,@ModelAttribute(value = "user")User user) {
-        this.userDetailsService.uppdateUser(user);
+    public String updateUser2(Model model,@ModelAttribute(value = "user")User user,
+            HttpServletRequest request) {
+        this.userDetailsService.uppdateUser(user,request.getParameter("pass"));
         return "redirect:/admin/user";
     }
 
     @RequestMapping("/userdetail/edituser")
     public String userEditUser(Model model, HttpSession session) {
-        model.addAttribute("currentUser", session.getAttribute("currentUser"));
         return "user-edituser";
     }
 
-    @PostMapping("/userdetail/edituser")
-    public String editUser(@ModelAttribute(value = "currentUser") User user) {
-        this.userDetailsService.uppdateUser(user);
-        return "redirect:/userdetail";
+    @PostMapping("/userdetail/edituser/success")
+    public String editUser(Model model,@ModelAttribute(value = "currentUser") User user,
+            HttpServletRequest request) {
+        this.userDetailsService.uppdateUser(user,request.getParameter("pass"));
+        return "redirect:/login";
     }
     
     @RequestMapping(path = "/userdetail")
@@ -110,12 +109,16 @@ public class UserController {
         model.addAttribute("users", this.userDetailsService.getUsersByActive());
         return "managerntd";
     }
-
-    @GetMapping("/admin/ntd/{id}")
-    public String NtdManager(Model model,
-            @PathVariable(value = "id") int id,
-            @RequestParam(value = "result", defaultValue = "null") boolean result) {
-        model.addAttribute("accept", this.userDetailsService.acceptNtd(id, result));
+    
+    @PostMapping("/admin/ntd/agree")
+    public String AgreeNTD(Model model, HttpServletRequest request) {
+        this.userDetailsService.agreeNtd(Integer.parseInt(request.getParameter("agreeNTD")));
+        return "redirect:/admin/ntd";
+    }
+    
+    @PostMapping("/admin/ntd/refuse")
+    public String refuseNTD(Model model, HttpServletRequest request) {
+        this.userDetailsService.refuseNtd(Integer.parseInt(request.getParameter("refuseNTD")));
         return "redirect:/admin/ntd";
     }
 

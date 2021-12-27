@@ -47,11 +47,10 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String avatar;
-    @NotNull(message = "{job.name.nullErr}")
     private String username;
     private String password;
     private String cv;
-    private Boolean active;
+    private int active;
     @Column(name = "user_role")
     private String userRole;
 
@@ -59,11 +58,11 @@ public class User implements Serializable {
     private String confirmPassword;
 
     @Transient
-    @NotNull(message = "{job.image.nullErr}")
+//    @NotNull(message = "{job.image.nullErr}")
     private MultipartFile file;
 
     @Transient
-    @NotNull(message = "{job.image.nullErr}")
+//    @NotNull(message = "{job.image.nullErr}")
     private MultipartFile filecv;
 
     @ManyToOne()
@@ -203,14 +202,14 @@ public class User implements Serializable {
     /**
      * @return the active
      */
-    public Boolean getActive() {
+    public int getActive() {
         return active;
     }
 
     /**
      * @param active the active to set
      */
-    public void setActive(Boolean active) {
+    public void setActive(int active) {
         this.active = active;
     }
 

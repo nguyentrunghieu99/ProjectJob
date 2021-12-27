@@ -60,7 +60,7 @@
                 <c:forEach items="${jobs}" var="j">
                     <a href="<c:url value="/jobs/"/>${j.id}" class="c-itemJob">
                         <div class="c-itemJob__logo">
-                            <img src="${currentUser.avatar}" alt="null">
+                            <img src="${j.user.avatar}" alt="null">
                         </div>
                         <div class="c-itemJob__content">
                             <h3>${j.name}</h3>

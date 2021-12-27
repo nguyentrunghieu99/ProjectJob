@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private JobRepository jobRepository;
 
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
             try {
                 Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
-                user.setAvatar((String) r.get("secure_url"));;
+                user.setAvatar((String) r.get("secure_url"));
             } catch (IOException ex) {
                 System.err.println("==ADD PRODUCT==" + ex.getMessage());
             }
@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
         String pass = user.getPassword();
         user.setPassword(this.passwordEncoder.encode(pass));
         user.setUserRole(User.USER);
+        user.setActive(0);
         return this.userRepository.addUser(user);
     }
 
@@ -97,11 +98,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void uppdateUser(User user) {
+    public void uppdateUser(User user,String pass) {
 
-        if (user.getFile().isEmpty()||user.getFile()== null) {
+        if (!user.getFile().isEmpty()) {
             try {
-                user.setAvatar("");
                 Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
                 user.setAvatar((String) r.get("secure_url"));;
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
             }
         }
 
-        if (user.getFilecv().isEmpty()||user.getFilecv()== null) {
+        if (!user.getFilecv().isEmpty()) {
             try {
                 user.setCv("");
                 Map cv = this.cloudinary.uploader().upload(user.getFilecv().getBytes(),
@@ -119,6 +119,16 @@ public class UserServiceImpl implements UserService {
             } catch (IOException ex) {
                 System.err.println("==ADD PRODUCT==" + ex.getMessage());
             }
+        }
+        if ((user.getActive() == 1 || user.getActive() == 0) && "ROLE_NTD".equals(user.getUserRole())) {
+            user.setActive(2);
+        }
+        if (user.getActive() == 2 && "ROLE_USER".equals(user.getUserRole())) {
+            user.setActive(0);
+        }
+        if(!pass.isEmpty()&& pass.length()>5){
+        String password = this.passwordEncoder.encode(pass);
+        user.setPassword(password);
         }
         this.userRepository.updateUser(user);
     }
@@ -134,22 +144,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean acceptNtd(int userId,boolean b) {
-        User u = this.userRepository.getUserById(userId);
-        this.userRepository.acceptNtd(u,b);
-        return true;
-    }
-
-    @Override
-    public void applyPost(User user) {
-        
-        user.setActive(Boolean.FALSE);
-        
+    public void sendAppliNtd(User user) {
+        user.setActive(1);
         this.userRepository.updateUser(user);
     }
 
     @Override
     public List<User> getUsersByActive() {
-       return this.userRepository.getUsersByActive();
+        return this.userRepository.getUsersByActive();
+    }
+
+    @Override
+    public void agreeNtd(int userId) {
+        User u = this.getUserById(userId);
+        u.setActive(2);
+        u.setUserRole("ROLE_NTD");
+        this.userRepository.updateUser(u);
+    }
+
+    @Override
+    public void refuseNtd(int userId) {
+        User u = this.getUserById(userId);
+        u.setActive(0);
+        this.userRepository.updateUser(u);
     }
 }

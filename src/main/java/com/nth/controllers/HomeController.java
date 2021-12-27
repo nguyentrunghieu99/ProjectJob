@@ -69,8 +69,8 @@ public class HomeController {
     }
        
     @PostMapping("/")
-    public String test(Model model,@ModelAttribute(value = "currentUser")User user){
-        this.userDetailsService.applyPost(user);
+    public String SendAppliNtd(Model model,@ModelAttribute(value = "currentUser")User user){;
+        this.userDetailsService.sendAppliNtd(user);
         return "redirect:/";
     }
 }
