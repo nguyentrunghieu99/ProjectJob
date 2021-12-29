@@ -66,10 +66,14 @@ public class UserServiceImpl implements UserService {
                 System.err.println("==ADD PRODUCT==" + ex.getMessage());
             }
         }
-        String pass = user.getPassword();
-        user.setPassword(this.passwordEncoder.encode(pass));
-        user.setUserRole(User.USER);
-        user.setActive(0);
+
+        if(!user.getPassword().isEmpty()){
+            String pass = user.getPassword();
+            user.setPassword(this.passwordEncoder.encode(pass));
+        }
+            user.setUserRole(User.USER);
+            user.setActive(1);
+            
         return this.userRepository.addUser(user);
     }
 
@@ -98,7 +102,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void uppdateUser(User user,String pass) {
+    public boolean uppdateUser(User user, String pass) {
 
         if (!user.getFile().isEmpty()) {
             try {
@@ -120,17 +124,23 @@ public class UserServiceImpl implements UserService {
                 System.err.println("==ADD PRODUCT==" + ex.getMessage());
             }
         }
-        if ((user.getActive() == 1 || user.getActive() == 0) && "ROLE_NTD".equals(user.getUserRole())) {
+        if ((user.getActive() == 0 || user.getActive() == 1) && "ROLE_NTD".equals(user.getUserRole())) {
             user.setActive(2);
         }
         if (user.getActive() == 2 && "ROLE_USER".equals(user.getUserRole())) {
             user.setActive(0);
         }
-        if(!pass.isEmpty()&& pass.length()>5){
-        String password = this.passwordEncoder.encode(pass);
-        user.setPassword(password);
+        if (!pass.isEmpty() && pass.length() > 5) {
+            String password = this.passwordEncoder.encode(pass);
+            user.setPassword(password);
         }
-        this.userRepository.updateUser(user);
+        if(user.getAge()<15){
+            user.setAge(15);
+        }
+        if(user.getAge()>70){
+            user.setAge(70);
+        }
+        return this.userRepository.updateUser(user);
     }
 
     @Override
@@ -166,6 +176,7 @@ public class UserServiceImpl implements UserService {
     public void refuseNtd(int userId) {
         User u = this.getUserById(userId);
         u.setActive(0);
+        u.setUserRole("ROLE_USER");
         this.userRepository.updateUser(u);
     }
 }

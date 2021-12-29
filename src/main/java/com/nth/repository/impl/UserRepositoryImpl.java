@@ -38,6 +38,7 @@ public class UserRepositoryImpl implements UserRepository {
             s.save(user);
             return true;
         } catch (HibernateException ex) {
+            s.clear();
             System.err.println(ex.getMessage());
         }
         return false;
@@ -87,6 +88,7 @@ public class UserRepositoryImpl implements UserRepository {
         Session s = this.sessionFactory.getObject().getCurrentSession();
         try {
             s.update(user);
+//            s.clear();
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
@@ -94,19 +96,6 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
-    @Override
-    public boolean acceptNtd(User user, boolean b) {
-        Session s = this.sessionFactory.getObject().getCurrentSession();
-//        if (b == true) {
-//            user.setActive(2);
-//            user.setUserRole("ROLE_NTD");
-//        }
-//        if (b == false) {
-//            user.setActive(0);
-//        }
-        s.update(user);
-        return true;
-    }
 
     @Override
     public List<User> getUsersByActive() {

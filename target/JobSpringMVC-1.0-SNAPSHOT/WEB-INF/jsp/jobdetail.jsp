@@ -34,7 +34,7 @@
                 <div class="btn">
                     <c:if test="${currentUser.cv=='' || currentUser.cv==null }">
                         <div>
-                            <a href="<c:url value="/userdetail"/>" class="btn btn-success" >Vui lòng thêm CV để ứng tuyển</a>
+                            <a href="<c:url value="/userdetail/edituser"/>" class="btn btn-success" >Vui lòng thêm CV để ứng tuyển</a>
                         </div>
                     </c:if>
 
@@ -58,42 +58,43 @@
                             <img src="https://www.topcv.vn/v4/image/job-detail/icon/1.svg" alt="">
                             <p>
                                 <c:if test="${job.pay != null}">
-                                    <span>Mức Lương</span><br><span>${job.pay} Triệu đồng</span>
+                                    Mức Lương<br><span>${job.pay} Triệu đồng</span>
                                 </c:if>
-
+                            </p>
+                            <p>
                                 <c:if test="${job.pay == null}">
-                                <p>Lương: Thỏa thuận</p>
-                            </c:if>
+                                    Mức Lương<br><span>Thỏa thuận</span>
+                                </c:if>
                             </p> 
                         </div>
                         <div class="recruitment__item">
                             <img src="https://www.topcv.vn/v4/image/job-detail/icon/5.svg" alt="">
                             <p>
-                                Số lượng tuyển<br><span>10 người</span>
+                                Số lượng tuyển<br><span>${job.quantily} người</span>
                             </p>
                         </div>
                         <div class="recruitment__item">
                             <img src="https://www.topcv.vn/v4/image/job-detail/icon/2.svg" alt="">
                             <p>
-                                Hình thức làm việc<br><span>Toàn thời gian</span>
+                                Hình thức làm việc<br><span>${job.timework}</span>
                             </p>
                         </div>
                         <div class="recruitment__item">
                             <img src="https://www.topcv.vn/v4/image/job-detail/icon/6.svg" alt="">
                             <p>
-                                <strong>Cấp bậc</strong> <br><span>Nhân viên</span>
+                                <strong>Cấp bậc</strong> <br><span>${job.level}</span>
                             </p>
                         </div>
                         <div class="recruitment__item">
                             <img src="https://www.topcv.vn/v4/image/job-detail/icon/3.svg" alt="">
                             <p>
-                                Giới tính<br><span>Không yêu cầu</span>
+                                Giới tính<br><span>${job.gender}</span>
                             </p>
                         </div>
                         <div class="recruitment__item">
                             <img src="https://www.topcv.vn/v4/image/job-detail/icon/7.svg" alt="">
                             <p>
-                                Kinh nghiệm<br><span>1 năm</span>
+                                Kinh nghiệm<br><span>${job.experience}</span>
                             </p>
                         </div>
                     </div>

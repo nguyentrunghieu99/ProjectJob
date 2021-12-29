@@ -23,6 +23,7 @@
                 <img class="img-fluid" src="${user.avatar}" alt="imgAvatar"/>
             </div>
         </form>-->
+        <h1>${errMsg}</h1>
 
         <h1>Thông tin Username: ${user.username}</h1>
         <form:form method="post" action="/JobSpringMVC/admin/user/edit-success" modelAttribute="user" enctype="multipart/form-data">

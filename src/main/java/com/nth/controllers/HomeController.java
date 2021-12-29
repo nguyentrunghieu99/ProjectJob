@@ -18,7 +18,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +68,7 @@ public class HomeController {
     }
        
     @PostMapping("/")
-    public String SendAppliNtd(Model model,@ModelAttribute(value = "currentUser")User user){;
+    public String SendAppliNtd(Model model,@ModelAttribute(value = "currentUser")User user){
         this.userDetailsService.sendAppliNtd(user);
         return "redirect:/";
     }

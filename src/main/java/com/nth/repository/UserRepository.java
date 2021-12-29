@@ -7,7 +7,6 @@ package com.nth.repository;
 
 import com.nth.pojos.User;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -20,6 +19,5 @@ public interface UserRepository {
     List<User> getUsers(String username);
     User getUserById(int userId);
     void deleteUser(int Id);
-    boolean acceptNtd(User user,boolean b);
     List<User> getUsersByActive();
 }

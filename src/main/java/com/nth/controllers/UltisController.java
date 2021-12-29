@@ -90,11 +90,6 @@ public class UltisController {
         return "redirect:/";
     }
 
-    @RequestMapping(path = "/td/detail/application")
-    public String listApply() {
-        return "ntd-apply";
-    }
-
     @PostMapping("/td/detail/applications")
     public String listApply(Model model,
             HttpServletRequest request) {

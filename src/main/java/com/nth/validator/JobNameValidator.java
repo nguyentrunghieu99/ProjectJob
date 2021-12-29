@@ -32,6 +32,10 @@ public class JobNameValidator implements Validator {
         if (j.getName().isEmpty()) {
             errors.rejectValue("name", "job.name.nullErr");
         }
+        
+        if (!j.getGender().contains("Nam")) {
+            errors.rejectValue("gender", "gender");
+        }
 
         }
 

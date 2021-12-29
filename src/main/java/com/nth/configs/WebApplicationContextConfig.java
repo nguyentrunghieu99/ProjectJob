@@ -10,6 +10,8 @@ import com.nth.formatter.JobFormatter;
 import com.nth.formatter.LocationFormatter;
 import com.nth.formatter.UserFormatter;
 import com.nth.validator.JobNameValidator;
+import com.nth.validator.UserNameValidator;
+import com.nth.validator.UserValidator;
 import com.nth.validator.WebAppValidator;
 import java.util.HashSet;
 import java.util.Set;
@@ -101,20 +103,29 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public WebAppValidator jobValidator() {
+    public WebAppValidator jobValidator(){
         Set<Validator> springValidators = new HashSet<>();
         springValidators.add(new JobNameValidator());
         WebAppValidator v = new WebAppValidator();
         v.setSpringValidators(springValidators);
-
+        return v;
+    }
+    
+    @Bean
+    public UserValidator userValidator(){
+        Set<Validator> springValidators = new HashSet<>();
+        springValidators.add(new UserNameValidator());
+        UserValidator v = new UserValidator();
+        v.setSpringValidators(springValidators);
         return v;
     }
 
+ 
+    
     @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
         v.setValidationMessageSource(messageSource());
-
         return v;
     }
 }

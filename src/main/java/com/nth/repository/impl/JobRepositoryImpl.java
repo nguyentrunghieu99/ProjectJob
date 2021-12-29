@@ -18,6 +18,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.nth.repository.JobRepository;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 
@@ -44,22 +45,21 @@ public class JobRepositoryImpl implements JobRepository {
         query = query.select(root);
         query = query.orderBy(builder.desc(root));
 
+        List<Predicate> predicates = new ArrayList<>();
+
         if (!kw.isEmpty()) {
-            Predicate p = builder.like(root.get("name").as(String.class),
-                    String.format("%%%s%%", kw));
-            query = query.where(p);
-
+            predicates.add(builder.like(root.get("name").as(String.class),
+                    String.format("%%%s%%", kw)));
         }
-
         if (cat > 0) {
-            Predicate p1 = builder.equal(root.get("category"), cat);
-            query = query.where(builder.and(p1));
+            predicates.add(builder.equal(root.get("category"), cat));
         }
 
         if (loca > 0) {
-            Predicate p2 = builder.equal(root.get("location"), loca);
-            query = query.where(p2);
+            predicates.add(builder.equal(root.get("location"), loca));
         }
+
+        query.where(predicates.toArray(new Predicate[]{}));
 
         Query q = s.createQuery(query);
 
@@ -87,24 +87,39 @@ public class JobRepositoryImpl implements JobRepository {
         CriteriaBuilder builder = s.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root root = query.from(Job.class);
+//        if (!kw.isEmpty()) {
+//            Predicate p = builder.like(root.get("name").as(String.class),
+//                    String.format("%%%s%%", kw));
+//
+//            query = query.where(p);
+//        }
+//
+//        if (cat > 0) {
+//            Predicate p1 = builder.equal(root.get("category"), cat);
+//            query = query.where(p1);
+//        }
+//
+//        if (loca > 0) {
+//            Predicate p1 = builder.equal(root.get("location"), loca);
+//            query = query.where(p1);
+//
+//        }
+
+        List<Predicate> predicates = new ArrayList<>();
+
         if (!kw.isEmpty()) {
-            Predicate p = builder.like(root.get("name").as(String.class),
-                    String.format("%%%s%%", kw));
-
-            query = query.where(p);
+            predicates.add(builder.like(root.get("name").as(String.class),
+                    String.format("%%%s%%", kw)));
         }
-
         if (cat > 0) {
-            Predicate p1 = builder.equal(root.get("category"), cat);
-            query = query.where(p1);
+            predicates.add(builder.equal(root.get("category"), cat));
         }
 
         if (loca > 0) {
-            Predicate p1 = builder.equal(root.get("location"), loca);
-            query = query.where(p1);
-
+            predicates.add(builder.equal(root.get("location"), loca));
         }
-        query = query.multiselect(builder.count(root.get("id").as(Integer.class)));
+        query.where(predicates.toArray(new Predicate[]{}));
+        query.multiselect(builder.count(root.get("id").as(Integer.class)));
         Query q = s.createQuery(query);
         return Long.parseLong(q.getSingleResult().toString());
     }

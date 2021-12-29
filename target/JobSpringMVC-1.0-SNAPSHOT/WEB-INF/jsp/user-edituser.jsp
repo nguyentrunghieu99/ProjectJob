@@ -7,7 +7,7 @@
     <div class="container p-top">
     <h1>Thông tin Username: ${currentUser.username}</h1>
         <form:form method="post" action="/JobSpringMVC/userdetail/edituser/success" modelAttribute="currentUser" enctype="multipart/form-data">
-            <table border="0" cellpadding="5">
+<!--            <table border="0" cellpadding="5">
                 <form:hidden name="userId" path="id"/>
                 <form:hidden path="avatar"/>
                 <form:hidden path="Cv"/>
@@ -17,7 +17,7 @@
                 <form:hidden path="password"/>
 
 
-                <tr>
+-->                <tr>
                     <td>FirstName:</td>
                     <td><form:input path="firstName"/></td>
                 </tr
@@ -91,5 +91,6 @@
                 </tr>
             </table>
         </form:form>
+
 
     </div>

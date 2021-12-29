@@ -19,7 +19,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.Valid;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,14 +46,29 @@ public class User implements Serializable {
     private int id;
 
     @Column(name = "first_name")
+    @NotEmpty(message = "{notnull}")
     private String firstName;
+    
     @Column(name = "last_name")
+    @NotEmpty(message = "{notnull}")
     private String lastName;
+    
+    @Min(value = 15, message = "{user.age.min}")
+    @Max(value = 70, message = "{user.age.max}")
     private int age;
+    
+    @NotEmpty(message = "{notnull}")
+    @Email(message = "{user.email}")
     private String email;
+    
+    @NotEmpty(message = "{notnull}")
     private String phone;
+    
     private String avatar;
+    
+    @NotEmpty(message = "{notnull}")
     private String username;
+    @NotEmpty(message = "{notnull}")
     private String password;
     private String cv;
     private int active;
@@ -58,11 +79,9 @@ public class User implements Serializable {
     private String confirmPassword;
 
     @Transient
-//    @NotNull(message = "{job.image.nullErr}")
     private MultipartFile file;
 
     @Transient
-//    @NotNull(message = "{job.image.nullErr}")
     private MultipartFile filecv;
 
     @ManyToOne()

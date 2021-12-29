@@ -25,27 +25,25 @@
         </div>
     </div>
 </div>
-
+<c:if test="${currentUser.active == 1}">
+                        <form:form method="post" action="" modelAttribute="currentUser">
+                            <input type="submit" class="c-btn c-btn--recruitment" value="Đăng Ký Nhà Tuyển Dụng"/></td
+                        </form:form>
+                    </c:if>
 <section class="p-job">
     <div class="container">
         <div class="filters">
             <form action="">
                 <input type="text" name="kw" placeholder="Tìm kiếm"/>
-                <input type="submit" value="Tìm kiếm" class="btn btn-danger" />
-            </form>
 
-
-            <form action="">
                 <select name="cat">
                     <option value="">Tất cả lĩnh vực</option>
                     <c:forEach items="${categories}" var="c">
                         <option value="${c.id}">${c.name}</option>
                     </c:forEach>
                 </select>
-                <input type="submit" value="Xác nhận" class="btn btn-danger"/>
-            </form>
 
-            <form action="">
+
                 <select name="loca">
                     <option value="">Toàn quốc</option>
                     <c:forEach items="${locations}" var="l">
@@ -104,11 +102,12 @@
                     </a>
                 </c:forEach>
             </div>
+
             <div class="new">
                 <sec:authorize access="hasAnyRole('ROLE_USER')">
-                <div class="new-item--job">
-                    <h3>Việc làm dành cho bạn</h3>
-                </div>
+                    <div class="new-item--job">
+                        <h3>Việc làm dành cho bạn</h3>
+                    </div>
                 </sec:authorize>
                 <c:forEach items="${jobForUser}" var="j">
                     <a href="<c:url value="/jobs/"/>${j.id}">
@@ -130,7 +129,5 @@
                 </c:forEach>
             </div>
         </div>
-
-
 </section>
 

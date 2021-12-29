@@ -9,7 +9,9 @@
     <p>Email: ${i.user.email}</p>
     <p>Nội dung ứng tuyển:${i.content}</p>
     <div class="c-itemJob__logo">
+        <a href="${i.user.cv}">
         <img src="${i.user.cv}"/>
+        </a>
     </div>
 </c:forEach>
 </div>

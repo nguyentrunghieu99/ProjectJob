@@ -9,26 +9,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -50,17 +43,16 @@ public class Job implements Serializable {
     private String reason;
     private String address;
 
-    @Min(value = 100000, message = "{job.pay.minErr}")
-    @Max(value = 100000000, message = "{job.pay.maxErr}")
+    @Min(value = 3, message = "{job.pay.minErr}")
+    @Max(value = 500, message = "{job.pay.maxErr}")
     private BigDecimal pay;
-//    private String image;
     @Column(name = "created_date")
     private Date createDate;
-    private Boolean active;
-
-//    @Transient
-//    @NotNull(message = "file")
-//    private MultipartFile file;
+    private int quantily;
+    private String timework;
+    private String level;
+    private String experience;
+    private String gender;
 
     @ManyToOne()
     @JoinColumn(name = "category_id")
@@ -123,27 +115,6 @@ public class Job implements Serializable {
     }
 
    
-
-    /**
-     * @return the createDate
-     */
-    /**
-     * @return the active
-     */
-    public Boolean getActive() {
-        return active;
-    }
-
-    /**
-     * @param active the active to set
-     */
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    /**
-     * @return the category
-     */
     public Category getCategory() {
         return category;
     }
@@ -267,6 +238,77 @@ public class Job implements Serializable {
      *  */
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    /**
+     * @return the timework
+     */
+    public String getTimework() {
+        return timework;
+    }
+
+    /**
+     * @return the level
+     */
+    public String getLevel() {
+        return level;
+    }
+
+    /**
+     * @return the experience
+     */
+    public String getExperience() {
+        return experience;
+    }
+
+    /**
+     * @return the gender
+     */
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * @return the quanlity
+     */
+    public int getQuantily() {
+        return quantily;
+    }
+
+    /**
+     * @param quanlity the quanlity to set
+     */
+    public void setQuantily(int quanlity) {
+        this.quantily = quanlity;
+    }
+
+    /**
+     * @param timework the timework to set
+     */
+    public void setTimework(String timework) {
+        this.timework = timework;
+    }
+
+    /**
+     * @param level the level to set
+     */
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    /**
+     * @param experience the experience to set
+     */
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
     }
    
     /**

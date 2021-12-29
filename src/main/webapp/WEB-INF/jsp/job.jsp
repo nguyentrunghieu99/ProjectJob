@@ -1,8 +1,3 @@
-<%-- 
-    Document   : job
-    Created on : Sep 13, 2021, 3:52:45 PM
-    Author     : Hieu
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -47,6 +42,36 @@
             <label for="pay">Lương</label>
             <form:input type="text" id="pay" path="pay" cssClass="form-control" placeholder="Lương thỏa thuận" />
             <form:errors path="pay" cssClass="alert alert-danger" element="div"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="quantily">Số lượng tuyển</label>
+            <form:input type="text" id="quantily" path="quantily" cssClass="form-control"/>
+            <form:errors path="quantily" cssClass="alert alert-danger" element="div"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="timework">Hình thức làm việc</label>
+            <form:input type="text" id="timework" path="timework" cssClass="form-control"/>
+            <form:errors path="timework" cssClass="alert alert-danger" element="div"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="level">Cấp bậc</label>
+            <form:input type="text" id="level" path="level" cssClass="form-control"/>
+            <form:errors path="level" cssClass="alert alert-danger" element="div"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="experience">Yêu cầu kinh nghiệm</label>
+            <form:input type="experience" id="experience" path="experience" cssClass="form-control" placeholder="Không yêu cầu" />
+            <form:errors path="experience" cssClass="alert alert-danger" element="div"/>
+        </div>
+        
+        <div class="form-group">
+            <label for="gender">Yêu cầu giới tính</label>
+            <form:input type="text" id="gender" path="gender" cssClass="form-control" placeholder="Không yêu cầu" />
+            <form:errors path="gender" cssClass="alert alert-danger" element="div"/>
         </div>
 
         <div class="form-group">
