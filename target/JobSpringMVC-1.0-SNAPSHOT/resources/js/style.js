@@ -59,6 +59,40 @@ window.onload = function () {
     }
 }
 
+$(document).ready(function() {
+    $("body").load('html',function(){
+        $(function(){
+            //scroll top
+            window.onscroll = function () {
+              let top =
+              window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+              if (top > 300) {
+                $(".c-btnscroll").addClass('is-active');
+              } else {
+                $(".c-btnscroll").removeClass('is-active');
+              }
+              //click
+              $(".c-btnscroll").on("click",function(){
+                $(window).scrollTop(0)
+              })
+            };
+
+            //scroll to view
+            $(document).on('click', '.c-btnscroll', function(e){
+              e.preventDefault();
+              var id = $(this).attr('href');
+              $('html,body').animate({scrollTop: $(id).offset().top - 150}, 100);
+            });
+            $(".nav-link a").on("click",function(){
+                $(".nav-link a").removeClass("is-line");
+                $(this).addClass("is-line");
+            })
+        });
+    })
+})
+
+
+
 
 
 

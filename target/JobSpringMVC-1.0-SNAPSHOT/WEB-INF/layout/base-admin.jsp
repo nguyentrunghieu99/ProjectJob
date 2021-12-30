@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>
             <tiles:insertAttribute name="title" />
@@ -31,25 +31,26 @@
 
     </head>
     <body>
-        
-            <!-- HEADER -->
-            <tiles:insertAttribute name="header"/>
 
-            <!-- CONTENT -->
-            <main>
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <tiles:insertAttribute name="left"/>
-                    </div>
+        <!-- HEADER -->
+        <tiles:insertAttribute name="header"/>
+
+        <!-- CONTENT -->
+        <main>
+            <div class="admin-content">
+                <div class="sidebar">
+                    <tiles:insertAttribute name="left"/>
                 </div>
-                <div class="row">
-                    <div class="col-md-8 col-xs-12">
+                <div class="content-main">
+                    <div class="inner">
                         <tiles:insertAttribute name="content"/>
                     </div>
                 </div>
-            </main>
-            <!-- FOOTER -->
-            <tiles:insertAttribute name="footer"/>
+            </div>
+            
+        </main>
+        <!-- FOOTER -->
+        <tiles:insertAttribute name="footer"/>
 
         <script src="<c:url value="/js/stats.js"/>"></script>
     </body>

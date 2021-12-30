@@ -8,7 +8,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="c-footer">
 <img src="<c:url value="/images/footer.png"/>"/>
+<a href="#" class="c-btnscroll"></a>
 <div>
-<strong class="container">CoppyRight@...</strong> by Hieu
+<strong class="container">CoppyRight@...</strong> by Đạt Nguyễn
 </div>
 </div>

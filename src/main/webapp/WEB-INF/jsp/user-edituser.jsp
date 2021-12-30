@@ -175,7 +175,7 @@
                     <form:input type="file"  path="filecv" cssClass="form-control" />
                 </div>
                 <div class="btn-box">
-                    <input type="submit" value="Đăng Ký" class="btn btn-danger"/>
+                    <input type="submit" value="Thay đổi" class="btn btn-danger"/>
                 </div>
             </form:form>
         </div>

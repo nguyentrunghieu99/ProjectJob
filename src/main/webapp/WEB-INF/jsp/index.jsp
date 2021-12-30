@@ -105,7 +105,7 @@
                 </sec:authorize>
                 <c:forEach items="${jobForUser}" var="j">
                     <a href="<c:url value="/jobs/"/>${j.id}">
-                        <div class="new-item" >
+                        <div class="new-item new-item--a" >
                             <img class="c-itemJob__logo"src="${j.user.avatar}" alt="null">
                             <h3>Tên Job: ${j.name}</h3>
                             <p>Địa điểm: ${j.location.name}</p>
@@ -122,6 +122,13 @@
                     </a>
                 </c:forEach>
             </div>
+        </div>
+        <div>
+            <ul class="pagination">
+                <c:forEach begin="1" end="${Math.ceil(counter/maxIn)}" var="i">
+                    <li class="page-item"><a class="page-link" href="<c:url value="/"/>?kw=${param.kw}&page=${i}&cat=${param.cat}&loca=${param.loca}">${i}</a></li>
+                    </c:forEach>
+            </ul>
         </div>
 </section>
 

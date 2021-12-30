@@ -56,10 +56,10 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/edituser.jsp"/>   
     </definition>
     
-    <definition name="admin" extends="baseLayout" >
+<!--    <definition name="admin" extends="baseLayout" >
         <put-attribute name="title" value="Quản trị"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp"/>   
-    </definition>
+    </definition>-->
     
     <definition name="userdetail" extends="baseLayout" >
         <put-attribute name="title" value="Thông tin User"/>
@@ -106,9 +106,9 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/user-edituser.jsp"/>   
     </definition>
     
-    <definition name="baseAdnminLayout" template="/WEB-INF/layout/base-admin.jsp">
+    <definition name="baseAdminLayout" template="/WEB-INF/layout/base-admin.jsp">
         <put-attribute name="title" value="..." />
-<!--        <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>-->
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
         <put-attribute name="left" value="/WEB-INF/layout/admin-left.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
         <put-attribute name="content" value="There is content"/>
@@ -118,7 +118,13 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
 <!--    <definition name="admin" extends="baseAdminLayout">
         <put-attribute name="title" value="Quản trị"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin.jsp"/>   
-    </definition>-->
+    </definition>    -->
+    <definition name="userinfo" extends="baseAdminLayout" >
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+        <put-attribute name="left" value="/WEB-INF/layout/admin-left.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/user.jsp"/>   
+    </definition>
     
     
 
