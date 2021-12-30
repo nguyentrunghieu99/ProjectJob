@@ -16,9 +16,10 @@
             <tiles:insertAttribute name="title" />
         </title>
 
-        <link href="<c:url value="/images/work.jpg"/>" rel="icon"/>
+        <link href="<c:url value="/images/logo.png"/>" rel="icon"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="<c:url value="/css/main.css"/>"  rel="stylesheet"/>
+        <link href="<c:url value="/css/form.css"/>"  rel="stylesheet"/>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -27,23 +28,21 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="<c:url value="/js/main.js"/>"></script>
         <script src="<c:url value="/js/style.js"/>"></script>
+        <
         
         
 
     </head>
     <body>
         
-        <div class="container12">
             <!-- HEADER -->
-            <tiles:insertAttribute name="header"/>
-
             <!-- CONTENT -->
+            <main>
             <tiles:insertAttribute name="content"/>
-
+            </main>
             <!-- FOOTER -->
             <tiles:insertAttribute name="footer"/>
 
-        </div>
         <script src="<c:url value="/js/stats.js"/>"></script>
     </body>
 </html>

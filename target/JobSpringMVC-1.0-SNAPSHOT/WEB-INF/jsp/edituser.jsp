@@ -9,7 +9,7 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-    <div class="container p-top"> 
+    <div class="container"> 
 
         <%--<c:url value="/admin/user/edit" var="action"/>
         <c:if test="${errMsg != null}">

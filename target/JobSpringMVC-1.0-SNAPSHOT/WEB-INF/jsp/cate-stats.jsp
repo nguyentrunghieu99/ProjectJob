@@ -5,7 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="container p-top"> 
+<div class="container"> 
 <div style="width: 500px">
 <canvas id="cateChart"></canvas>
 </div>

@@ -12,10 +12,10 @@
 
 
 
-<main class="container p-top">
+<main class="container">
     <div class="crumbs container">
         <a href="<c:url value="/"/>" class="crumbs__name">Trang chủ</a>
-        <p class="crumbs__name">Việc làm gì đó</p>
+        <p class="crumbs__name">Chi tiết việc làm</p>
     </div>
 
     <div class="main-info">
@@ -28,22 +28,23 @@
                 <div class="box__text">
 
                     <h3>Tên Job: ${job.name}</h3>
-                    <p>Người đăng: ${currentUser.firstName} ${currentUser.lastName}</p>
+                    <p>Người đăng: ${job.user.firstName} ${job.user.lastName}</p>
                 </div>
+                <sec:authorize access="hasAnyRole('ROLE_USER')">
+                    <div class="btn">
+                        <c:if test="${currentUser.cv=='' || currentUser.cv==null }">
+                            <div>
+                                <a href="<c:url value="/userdetail/edituser"/>" class="btn btn-success" >Vui lòng thêm CV để ứng tuyển</a>
+                            </div>
+                        </c:if>
 
-                <div class="btn">
-                    <c:if test="${currentUser.cv=='' || currentUser.cv==null }">
-                        <div>
-                            <a href="<c:url value="/userdetail/edituser"/>" class="btn btn-success" >Vui lòng thêm CV để ứng tuyển</a>
-                        </div>
-                    </c:if>
-
-                    <c:if test="${currentUser.cv!='' && currentUser.cv!=null }">
-                        <div>
-                            <a href="<c:url value="/apply/"/>${job.id}" class="btn btn-danger">Nộp Đơn Ứng Tuyển</a>
-                        </div>
-                    </c:if>
-                </div>
+                        <c:if test="${currentUser.cv!='' && currentUser.cv!=null }">
+                            <div>
+                                <a href="<c:url value="/apply/"/>${job.id}" class="btn btn-danger">Nộp Đơn Ứng Tuyển</a>
+                            </div>
+                        </c:if>
+                    </div>
+                </sec:authorize>
             </div>
             <div class="nav-link">
                 <a href="#recruitment" class="is-line">Tin tuyển dụng</a>

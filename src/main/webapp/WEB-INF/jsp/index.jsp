@@ -12,8 +12,7 @@
 
 
 
-<div class="page-header p-top">
-    <div class="container">
+<div class="page-header">
         <div class="page-header__banner">
             <div class="page-header__title">
                 Best Free Website Builders of 2021
@@ -23,13 +22,8 @@
                 With free website setup, you can launch a professional, customized site within hours.
             </div>
         </div>
-    </div>
 </div>
-<c:if test="${currentUser.active == 1}">
-                        <form:form method="post" action="" modelAttribute="currentUser">
-                            <input type="submit" class="c-btn c-btn--recruitment" value="Đăng Ký Nhà Tuyển Dụng"/></td
-                        </form:form>
-                    </c:if>
+
 <section class="p-job">
     <div class="container">
         <div class="filters">

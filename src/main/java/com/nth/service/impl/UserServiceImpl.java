@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(this.passwordEncoder.encode(pass));
         }
             user.setUserRole(User.USER);
-            user.setActive(1);
+            user.setActive(0);
             
         return this.userRepository.addUser(user);
     }

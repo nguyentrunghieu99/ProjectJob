@@ -3,7 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:url value="/jobs/{jobId}/apply" var="action"/>
 
-<div class="p-top container">
+<div class="container">
     
     <c:url value="/apply/{jobId}" var="action"/>
 <form:form method="post" action="${action}" modelAttribute="application">

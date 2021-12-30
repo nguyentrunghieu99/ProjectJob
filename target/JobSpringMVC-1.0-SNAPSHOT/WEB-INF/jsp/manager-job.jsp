@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="container p-top"> 
+<div class="container"> 
 <section class="p-job">
     <div class="container">
         <div class="filters">

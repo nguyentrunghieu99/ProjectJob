@@ -1,6 +1,6 @@
 <%-- 
-    Document   : base
-    Created on : Sep 13, 2021, 11:50:12 AM
+    Document   : base-admin
+    Created on : Dec 30, 2021, 11:29:04 AM
     Author     : Hieu
 --%>
 
@@ -28,17 +28,25 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="<c:url value="/js/main.js"/>"></script>
         <script src="<c:url value="/js/style.js"/>"></script>
-        <
-        
-        
 
     </head>
     <body>
         
             <!-- HEADER -->
+            <tiles:insertAttribute name="header"/>
+
             <!-- CONTENT -->
             <main>
-            <tiles:insertAttribute name="content"/>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <tiles:insertAttribute name="left"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-xs-12">
+                        <tiles:insertAttribute name="content"/>
+                    </div>
+                </div>
             </main>
             <!-- FOOTER -->
             <tiles:insertAttribute name="footer"/>

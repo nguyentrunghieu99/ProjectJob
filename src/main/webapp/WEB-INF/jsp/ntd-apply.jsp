@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="p-top container">
+<div class="container">
 <c:forEach items="${jobId}" var="i">
     <h1>Họ tên: ${i.user.firstName} ${i.user.lastName}</h1>
     <p>Tuổi: ${i.user.age }</p>

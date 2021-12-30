@@ -242,6 +242,7 @@ html {
 }
 .btn a:hover {
     opacity: 0.6;
+    text-decoration: none;
 }
 .btn a i {
     margin-right: 15px;
@@ -388,7 +389,9 @@ html {
 }
 
 main {
-    margin-top: 120px;
+    margin-top: 110px;
+    font-family: "Open Sans", sans-serif;
+    margin-bottom: 70px;
 }
 
 .container {
@@ -430,19 +433,37 @@ main {
     color: #000;
     font-size: 16px;
 }
+
 .c-header__left img {
-    width: 100px;
+    /*width: 100px;*/
     height: 100px;
     -o-object-fit: cover;
     object-fit: cover;
 }
 .c-header__right {
+    font-size: 12px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+}
+
+.c-header__right img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    
+}
+
+.c-input {
+    margin-right: 20px;
 }
 
 .c-btn {
@@ -453,20 +474,27 @@ main {
     -webkit-transition: 1s;
     transition: 1s;
 }
+
 .c-btn:hover {
     opacity: 0.7;
+    text-decoration: none;
 }
-.c-btn--login {
+.c-btn--shadow {
     border: 1px solid #00b14f;
     color: #00b14f;
 }
-.c-btn--register {
+.c-btn--green {
     background: #00b14f;
     color: #fff;
 }
-.c-btn--recruitment {
+.c-btn--black {
     background: #000;
     color: #fff;
+}
+
+.c-btn--color {
+    background: #6633ff;
+    color: #f0f0f0;
 }
 .c-btn:not(:last-child) {
     margin-right: 2rem;
@@ -726,16 +754,22 @@ body {
 
 .c-footer {
     position: fixed;
+    background-color: #f0f0f0;
     bottom: 0;
     width: 100%;
     left: 0;
     text-align: center;
     margin: 0;
-    padding: 15px;
+    padding: 20px;
+}
+.c-footer > img{
+    width: auto;
+    height: 30px;
 }
 
 .c-footer strong {
     font-size: 16px;
+    font-style: oblique;
 }
 
 .td-action {
