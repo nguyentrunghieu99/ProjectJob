@@ -32,8 +32,6 @@ public class JobNameValidator implements Validator {
         if (j.getName().isEmpty()) {
             errors.rejectValue("name", "job.name.nullErr");
         }
-        
-
         }
 
     }

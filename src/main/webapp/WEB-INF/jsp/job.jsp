@@ -7,52 +7,57 @@
 <c:url value="/td/jobs" var="action"/>
 
 <div class="container">
-
     <div class="login-form">
         <c:if test="${errMsg != null}">
             <div class="alert alert-danger">${errMsg}</div>
         </c:if>
-        <form:form method="post" action="${action}" modelAttribute="job">
+        <form:form method="post" action="${action}" modelAttribute="job" enctype="multipart/form-data">
             <h1>Đăng Tin Tuyển Dụng</h1>
             <form:hidden path="user" value= "${currentUser.id}"/>
             <div class="input-box">
-                <label for="name">Tên công việc</label>
+                <label for="name">Tên công việc (*)</label>
                 <form:input type="text" id="name" path="name" cssClass="form-control" />
                 <form:errors path="name" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="input-box">
-                <label for="description">Mô tả công việc</label>
+                <label for="description">Mô tả công việc (*)</label>
                 <form:textarea id="description" path="description"  cssClass="form-control" />
                 <form:errors path="description" cssClass="alert alert-danger" element="div"/>
             </div>
             <div class="input-box">
-                <label for="requirement">Yêu cầu công việc</label>
+                <label for="requirement">Yêu cầu công việc (*)</label>
                 <form:textarea id="requirement" path="requirement"  cssClass="form-control" />
                 <form:errors path="requirement" cssClass="alert alert-danger" element="div"/>
             </div>
             <div class="input-box">
-                <label for="reason">Lý do bạn sẽ yêu thích khi làm việc tại đây</label>
+                <label for="reason">Lý do bạn sẽ yêu thích khi làm việc tại đây (*)</label>
                 <form:textarea id="reason" path="reason"  cssClass="form-control" />
                 <form:errors path="reason" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="input-box">
-                <label for="pay">Lương</label>
+                <label for="pay">Lương (*)</label>
                 <form:input type="text" id="pay" path="pay" cssClass="form-control" placeholder="Lương thỏa thuận" />
                 <form:errors path="pay" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="input-box">
-                <label for="quantily">Số lượng tuyển</label>
+                <label for="quantily">Số lượng tuyển (*)</label>
                 <form:input type="text" id="quantily" path="quantily" cssClass="form-control"/>
                 <form:errors path="quantily" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="input-box">
-                <label for="timework">Hình thức làm việc</label>
+                <label for="timework">Hình thức làm việc (*)</label>
                 <form:input type="text" id="timework" path="timework" cssClass="form-control"/>
                 <form:errors path="timework" cssClass="alert alert-danger" element="div"/>
+            </div>
+            
+            <div class="input-box">
+                <label for="address">Địa chỉ (*)</label>
+                <form:textarea id="address" path="address"  cssClass="form-control" />
+                <form:errors path="address" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="input-box">
@@ -90,12 +95,6 @@
                         <option value="${loca.id}">${loca.name}</option>
                     </c:forEach>
                 </form:select>
-            </div>
-
-            <div class="input-box">
-                <label for="address">Địa chỉ</label>
-                <form:textarea id="address" path="address"  cssClass="form-control" />
-                <form:errors path="address" cssClass="alert alert-danger" element="div"/>
             </div>
 
             <div class="btn-box">

@@ -15,11 +15,11 @@
 <div class="page-header">
         <div class="page-header__banner">
             <div class="page-header__title">
-                Best Free Website Builders of 2021
+                The Best Jobs of 2022 Are Waiting For You
             </div>
             <div class="page-header__desc">
-                Build a free website with no technical skills required & bring your vision to life. <br>
-                With free website setup, you can launch a professional, customized site within hours.
+                Finding the right job has never been this simple. <br>
+                Already have us. We will help you find the most qualit & suitable jobs.
             </div>
         </div>
 </div>
@@ -84,7 +84,7 @@
                         <div class="c-itemJob__info my-date" >
                             <h3>${j.location.name}</h3>
                             <c:if test="${j.pay != null}">
-                                <p>Lương: ${j.pay} VNĐ</p>
+                                <p>Lương: ${j.pay} Triệu</p>
                             </c:if>
 
                             <c:if test="${j.pay == null}">
@@ -104,13 +104,13 @@
                     </div>
                 </sec:authorize>
                 <c:forEach items="${jobForUser}" var="j">
-                    <a href="<c:url value="/jobs/"/>${j.id}">
+                    <a href="<c:url value="/jobs/"/>${j.id}" class="hover">
                         <div class="new-item new-item--a" >
                             <img class="c-itemJob__logo"src="${j.user.avatar}" alt="null">
-                            <h3>Tên Job: ${j.name}</h3>
-                            <p>Địa điểm: ${j.location.name}</p>
+                            <h3>${j.name}</h3>
+                            <p>${j.location.name}</p>
                             <c:if test="${j.pay != null}">
-                                <p>Lương: ${j.pay} VNĐ</p>
+                                <p>Lương: ${j.pay} Triệu</p>
                             </c:if>
 
                             <c:if test="${j.pay == null}">

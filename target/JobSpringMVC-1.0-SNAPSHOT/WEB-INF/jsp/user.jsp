@@ -4,13 +4,9 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="functions">
     <form action="">
-        <div class="row">
-            <div class="col-md-11">
+        <div class="search">
                 <input class="form-control" type="text" name="username" placeholder="Nhập từ khóa"/>
-            </div>
-            <div >
                 <input type="submit" value="Tìm kiếm" class="btn btn-danger" />
-            </div>
         </div>
     </form>
     <div>
@@ -25,16 +21,12 @@
         </form>
 
         <div align="center" class="form-group form-group--btn">
-            <div>
-                <a class="btn btn-danger" href="<c:url value="/admin/user"/>">Xem tất cả</a>
-            </div>
-            <br>
-            <div>
-                <a class="btn btn-danger" href="<c:url value="/register"/>">Add User</a>
-            </div>
+            <a class="btn btn-danger" href="<c:url value="/register"/>">Add User</a>
         </div>
     </div>
 </div>
+
+
 <div class="form-group" align="center">
     <table class="table">
         <thead>

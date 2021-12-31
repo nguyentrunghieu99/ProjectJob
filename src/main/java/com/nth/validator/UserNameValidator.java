@@ -28,6 +28,9 @@ public class UserNameValidator implements Validator {
         if (u.getFile().isEmpty()) {
             errors.rejectValue("file", "user.avatar");
         }
+        if(!u.getPhone().matches("\\d{10}")){
+            errors.rejectValue("phone", "user.phone");
+        }
     }
     
 }

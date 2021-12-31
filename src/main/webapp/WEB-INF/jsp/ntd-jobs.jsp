@@ -8,7 +8,9 @@
 
     <div class="p-job__inner">
         <div class="list-job c-item">
+            
             <c:forEach items="${jobForNTD}" var="j">
+                <a href="<c:url value="/jobs/"/>${j.id}" class="hover">
                 <div class="c-itemJob">
                     <div class="c-itemJob__logo">
                         <img src="${currentUser.avatar}" alt="null">
@@ -34,17 +36,17 @@
 
                         <form method="post" action="/JobSpringMVC/td/detail/applications">
                             <input type="hidden" name="jobId" value="${j.id}">
-                            <input type="submit" value="Xem" class="btn btn-danger"/>
+                            <input type="submit" value="Xem" class="format-button"/>
                         </form>
 
                         <form method="post" action="/JobSpringMVC/td/detail">
                             <input type="hidden" name="deleteJob" value="${j.id}">
-                            <input type="submit" value="Xóa" class="btn btn-danger"/>
+                            <input type="submit" value="Xóa" class="format-button"/>
                         </form>
 
                     </div>
                 </div>
-
+            </a>
             </c:forEach>
         </div>
     </div>

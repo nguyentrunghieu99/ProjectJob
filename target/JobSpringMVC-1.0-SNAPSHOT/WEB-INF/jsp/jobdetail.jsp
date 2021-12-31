@@ -1,15 +1,10 @@
-<%-- 
-   Document   : info
-   Created on : Sep 13, 2021, 3:11:50 PM
-   Author     : Hieu
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
 
 
 <main class="container">
@@ -150,12 +145,8 @@
                 </div>
             </sec:authorize>
 
-
-
             <form>
                 <div>
-                    ${count}
-                    ${maxComm}
 
                     <ul class="pagination">
 
@@ -173,11 +164,11 @@
             <div id="commentArea">
                 <c:forEach items="${comments}" var="com">
                     <div class="row">
-                        <div class="col-md-2" style="padding: 10px">
+                        <div class="col-md-2 comment" style="padding: 10px">
                             <img class="rounded-circle img-fluid" src="<c:url value="${com.user.avatar}"/>" alt="${com.user.lastName}"/>
                         </div>
-                        <div class="col-md-10 my-date">
-                            <p>${com.user.firstName} ${com.user.lastName}</p>
+                        <div class="col-md-10 my-date comment">
+                            <h2>${com.user.firstName} ${com.user.lastName}</h2>
                             <p>${com.content}</p>
                             <i>${com.createDate}</i>
                         </div>
@@ -194,7 +185,7 @@
                     <c:forEach items="${jobForUser}" var="j">
                         <a href="<c:url value="/jobs/${j.id}"/>" class="c-itemJob">
                             <div class="c-itemJob__logo">
-                                <img src="null" alt="#">
+                                <img src="${j.user.avatar}" alt="${j.user.lastName}">
                             </div>
                             <div class="c-itemJob__content">
                                 <h3>${j.name}</h3>

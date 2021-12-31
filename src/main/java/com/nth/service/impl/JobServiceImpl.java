@@ -43,13 +43,8 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean addOrUpdate(Job job) {
-//            Map r = this.cloudinary.uploader().upload(job.getFile().getBytes(),
-//                    ObjectUtils.asMap("resource_type", "auto"));
-//            job.setImage((String) r.get("secure_url"));
         job.setCreateDate(new Date());
-
         return this.jobRepository.addOrUpdate(job);
-
     }
 
     @Override

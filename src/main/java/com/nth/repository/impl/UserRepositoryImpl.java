@@ -105,7 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
         Root root = query.from(User.class);
         query = query.select(root);
 
-        Predicate p = builder.equal(root.get("active").as(Integer.class), 1);
+        Predicate p = builder.equal(root.get("active").as(Integer.class), 2);
         query = query.where(p);
         Query q = s.createQuery(query);
         return q.getResultList();

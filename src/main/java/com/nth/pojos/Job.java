@@ -21,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -35,20 +37,24 @@ public class Job implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull(message = "name")
     private String name;
-    @NotNull(message = "desc")
     private String description;
+    
+    @NotEmpty(message = "{job.notnull.requirement}")
     private String requirement;
+    @NotEmpty(message = "{job.notnull.reason}")
     private String reason;
+    @NotEmpty(message = "{job.notnull.address}")
     private String address;
 
     @Min(value = 3, message = "{job.pay.minErr}")
     @Max(value = 500, message = "{job.pay.maxErr}")
-    private BigDecimal pay;
+    private int pay;
     @Column(name = "created_date")
     private Date createDate;
+    @Min(value = 1, message = "{job.quantily}")
     private int quantily;
+    @NotEmpty(message = "{job.notnull.timework}")
     private String timework;
     private String level;
     private String experience;
@@ -56,7 +62,6 @@ public class Job implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "category_id")
-    @NotNull(message = "{job.category.nullErr}")
     private Category category;
 
 
@@ -132,14 +137,14 @@ public class Job implements Serializable {
     /**
      * @return the pay
      */
-    public BigDecimal getPay() {
+    public int getPay() {
         return pay;
     }
 
     /**
      * @param pay the pay to set
      */
-    public void setPay(BigDecimal pay) {
+    public void setPay(int pay) {
         this.pay = pay;
     }
 

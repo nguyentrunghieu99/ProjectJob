@@ -87,24 +87,6 @@ public class JobRepositoryImpl implements JobRepository {
         CriteriaBuilder builder = s.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root root = query.from(Job.class);
-//        if (!kw.isEmpty()) {
-//            Predicate p = builder.like(root.get("name").as(String.class),
-//                    String.format("%%%s%%", kw));
-//
-//            query = query.where(p);
-//        }
-//
-//        if (cat > 0) {
-//            Predicate p1 = builder.equal(root.get("category"), cat);
-//            query = query.where(p1);
-//        }
-//
-//        if (loca > 0) {
-//            Predicate p1 = builder.equal(root.get("location"), loca);
-//            query = query.where(p1);
-//
-//        }
-
         List<Predicate> predicates = new ArrayList<>();
 
         if (!kw.isEmpty()) {

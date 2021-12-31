@@ -1,17 +1,28 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container">
-<c:forEach items="${jobId}" var="i">
-    <h1>Họ tên: ${i.user.firstName} ${i.user.lastName}</h1>
-    <p>Tuổi: ${i.user.age }</p>
-    <p>Số điện thoại: ${i.user.phone}</p>
-    <p>Email: ${i.user.email}</p>
-    <p>Nội dung ứng tuyển:${i.content}</p>
-    <div class="c-itemJob__logo">
-        <a href="${i.user.cv}">
-        <img src="${i.user.cv}"/>
-        </a>
-    </div>
-</c:forEach>
+<div class="form-group container" align="center">
+    <table border="1" cellpadding="5" style="background-color: activeborder" class="form-data">
+        <tr style="background-color: activecaption">
+            <th>Ảnh đại diện</th>
+            <th>Họ tên</th>
+            <th>Tuổi</th>
+            <th>Email</th>
+            <th>SĐT</th>
+            <th>Nội dung</th>
+            <th>Cv</th>
+        </tr>
+
+        <c:forEach items="${jobId}" var="j">
+            <tr>            
+                <td><img style="width: 200px"  class="img-fluid" src="${j.user.avatar}" alt="avt"/></td>
+                <td>${j.user.firstName} ${j.user.lastName}</td>
+                <td>${j.user.age}</td>
+                <td>${j.user.email}</td>
+                <td>${j.user.phone}</td>
+                <td>${j.content}</td>
+                <td><a href="${j.user.cv}">Xem Cv</a></td>
+            </tr>
+        </c:forEach>    
+    </table>
 </div>

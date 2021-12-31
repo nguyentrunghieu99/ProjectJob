@@ -65,7 +65,6 @@ public class JobController {
     @GetMapping("/td/jobs")
     public String list(Model model) {
         model.addAttribute("job", new Job());
-//        model.addAttribute("joblocas", this.locationService.getJobLoca());
         return "job";
     }
 
@@ -76,7 +75,7 @@ public class JobController {
             if (this.jobService.addOrUpdate(job) == true) {
 
                 model.addAttribute("success", "Đăng bài thành công");
-                return "forward:/";
+                return "redirect:/";
             } else {
                 model.addAttribute("errMsg", "Something wrong");
             }

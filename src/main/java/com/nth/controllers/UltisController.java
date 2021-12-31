@@ -44,18 +44,6 @@ public class UltisController {
     @Autowired
     private JobService jobService;
 
-    @RequestMapping("/admin")
-    public String admin(Model model, @RequestParam(value = "test", required = false, defaultValue = "0") int test) {
-        model.addAttribute("testa", test);
-        return "admin";
-    }
-
-//    @PostMapping("/admin")
-//    public String test(Model model,
-//            HttpServletRequest request){
-//        model.addAttribute("test", request.getParameter("test"));
-//        return "admin";
-//    }
     @RequestMapping("/admin/jobs")
     public String jobManager(Model model,
             @RequestParam(value = "kw", required = false, defaultValue = "") String kw,

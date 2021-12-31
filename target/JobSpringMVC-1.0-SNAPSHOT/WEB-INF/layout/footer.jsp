@@ -10,6 +10,6 @@
 <img src="<c:url value="/images/footer.png"/>"/>
 <a href="#" class="c-btnscroll"></a>
 <div>
-<strong class="container">CoppyRight@...</strong> by Đạt Nguyễn
+<strong class="container">CoppyRight@...</strong> by Hieu
 </div>
 </div>
